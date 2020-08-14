@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite">
+
+    <test name="Test">
+        <classes>
+            <class name="tests.LoginTests"></class>
+            <class name="tests.MenuTests"></class>
+        </classes>
+    </test>
+
+    <test name="Configurations">
+        <classes>
+            <class name="tests.DayProgramTests"></class>
+            <class name="tests.TeamManagerTests"></class>
+
+        </classes>
+    </test>
+
+</suite>

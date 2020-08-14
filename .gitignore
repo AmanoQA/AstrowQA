@@ -1,0 +1,24 @@
+# IntelliJ project files
+*.iml
+out
+gen
+*.jar
+*.exe
+*.log
+*.html
+*.png
+
+.idea/
+src/main/reports/
+src/main/resources/
+target/classes/IEDriverServer.exe
+target/classes/META-INF/
+target/classes/chromedriver.exe
+target/classes/geckodriver.exe
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
+target/test-classes/
+

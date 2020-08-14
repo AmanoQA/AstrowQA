@@ -13,7 +13,7 @@ import static org.testng.Assert.assertFalse;
 
 public class DayProgramTests extends ExtentManager {
 
-    @Test(priority = 1)
+    @Test
     public void addBasicDayProgram() throws InterruptedException {
         this.createTestReport("Add the basic Day program", "Add a new basic Day program");
 
@@ -43,7 +43,7 @@ public class DayProgramTests extends ExtentManager {
         assertTrue(dayProgramPage.checkIfItemIsPresentInTable(2, "01A") && (dayProgramPage.checkIfItemIsPresentInTable(3, "Basic DP")), "New item added not found in the list");
     }
 
-    @Test(priority = 1)
+    @Test
     public void addDayProgramWithPaidBreak() throws InterruptedException {
         this.createTestReport("Add Day program with Paid Break", "Add a new Day program with Paid Break ");
 
@@ -76,7 +76,7 @@ public class DayProgramTests extends ExtentManager {
 
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = {"addDayProgramWithPaidBreak"})
     public void editDayProgramWithPaidBreak() throws InterruptedException {
         this.createTestReport("Edit Day program with Paid Break", "Edit a Day program with Paid Break ");
 
@@ -110,7 +110,7 @@ public class DayProgramTests extends ExtentManager {
 
     }
 
-    @Test(priority = 2)
+    @Test
     public void checkDuplicateValidationMessage() throws InterruptedException{
         this.createTestReport("Duplicated DP Code", "Check if the \"Duplicate day program code!\" is displayed when using a duplicated DP Code");
 
@@ -134,7 +134,7 @@ public class DayProgramTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void checkMissingNameValidationMessage() throws InterruptedException{
         this.createTestReport("Missing Name DP ", "Check if the \"You must enter correct values in all required fields!\" is displayed when missing to fill the Name");
 
@@ -156,7 +156,7 @@ public class DayProgramTests extends ExtentManager {
 
     }
 
-    @Test(priority = 3)
+    @Test
     public void deleteYesDP() throws InterruptedException {
         this.createTestReport("Delete DP", "Delete a DP from the list");
 

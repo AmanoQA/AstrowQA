@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginTests extends ExtentManager {
 
-    @Test(priority = 1)
+    @Test
     public void loginTestHR() {
         this.createTestReport("Login with HR user", "Make a login using HR user.");
 
@@ -21,7 +21,7 @@ public class LoginTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void loginTestAdministrator() {
         this.createTestReport("Login with Administrator user", "Make a login using Administrator user.");
 

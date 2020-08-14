@@ -9,7 +9,7 @@ import pageObjects.WebPages.LoginPage;
 import utils.ExtentManager;
 
 public class MenuTests extends ExtentManager {
-    @Test(priority = 1)
+    @Test
     public void clickOnOperationMenu(){
         this.createTestReport("Operation menu buttons", "Click on all Operations menu buttons.");
 
@@ -37,7 +37,7 @@ public class MenuTests extends ExtentManager {
 
     }
 
-    @Test(priority = 3)
+    @Test
     private void clickOnViewMenu(){
         this.createTestReport("View menu buttons", "Click on all View menu buttons.");
 
@@ -58,7 +58,7 @@ public class MenuTests extends ExtentManager {
 
     }
 
-    @Test(priority = 2)
+    @Test
     private void clickOnConfigurationMenu() {
         this.createTestReport("Configuration menu buttons", "Click on all Configuration menu buttons.");
 

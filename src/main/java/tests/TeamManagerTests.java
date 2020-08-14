@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class TeamManagerTests extends ExtentManager {
 
-    @Test(priority = 1)
+    @Test
     public void addAbsenceAdjustToNormtime() throws InterruptedException {
         this.createTestReport("Add Absence with \"(1) Adjust to normtime\" for an employee", "Employee: ACHIM ALIN, day: 6, Absence - Blood Donation");
 
@@ -45,7 +45,7 @@ public class TeamManagerTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void addAbsenceCustomTime() throws InterruptedException {
         this.createTestReport("Add Absence with \"(h) Custom time\" for an employee", "Employee: ACHIM ALIN, day: 7, Absence - Business trip");
 
@@ -78,7 +78,7 @@ public class TeamManagerTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void addBooking() throws InterruptedException {
         this.createTestReport("Add booking for an employee", "Employee: AGACHE MIHAI, day: 4, Booking - 10:25");
 
@@ -105,7 +105,7 @@ public class TeamManagerTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void checkBookingForEmployee(){
         this.createTestReport("Check Booking on an Employee", "Employee: ACHIM ALIN, day: 10, booking: 15:25");
 
@@ -127,7 +127,7 @@ public class TeamManagerTests extends ExtentManager {
 
     }
 
-    @Test(priority = 1)
+    @Test
     public void selectDateFromCalendar() throws InterruptedException {
         this.createTestReport("Select date from calendar", "Select a date from calendar and click on Apply button");
 

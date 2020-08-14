@@ -176,5 +176,5 @@ public class DayProgramTests extends ExtentManager {
 
         assertFalse(dayProgramPage.checkIfItemIsPresentInTable(2, "03A"), "DP not deleted");
     }
+
 }
-//*[contains(@class, 'clsNavigateLastEmployee')]

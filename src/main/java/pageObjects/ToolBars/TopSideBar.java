@@ -23,6 +23,9 @@ public class TopSideBar {
     @FindBy(xpath = "//span[@class = 'x-btn-inner clsDeleteItem'][contains(text(), 'Delete')]")
     private WebElement deleteBtn;
 
+    @FindBy(xpath = "//span[contains(@class, 'clsUndelete') and text()='Undelete']")
+    private WebElement undeleteBtn;
+
     @FindBy(xpath = "//span[@class='x-btn-inner'][contains(text(), 'Yes')]")
     private WebElement deleteYes;
 
@@ -73,6 +76,14 @@ public class TopSideBar {
         this.toolBarWait.until(ExpectedConditions.visibilityOf(deleteYes));
         this.deleteYes.click();
         this.writeLog.info("Click on Yes button to confirm the deletion");
+        Thread.sleep(2000);
+    }
+
+    public void clickUndelete() throws InterruptedException {
+
+        this.toolBarWait.until(ExpectedConditions.visibilityOf(undeleteBtn));
+        this.undeleteBtn.click();
+        this.writeLog.info("Click on Undelete button");
         Thread.sleep(2000);
     }
 

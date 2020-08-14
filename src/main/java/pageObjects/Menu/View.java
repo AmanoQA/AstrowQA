@@ -42,6 +42,9 @@ public class View extends ExtentManager {
     @FindBy(xpath = "//*[contains(@class, 'clsVisitors')]")
     private WebElement visitorsListBtn;
 
+    @FindBy(xpath = "//*[contains(@class, 'clsHolidayCard')]")
+    private WebElement holidayCardBtn;
+
 
     // constructor
     public View(WebDriver d, WebDriverWait w, ExtentTest l) {
@@ -104,5 +107,11 @@ public class View extends ExtentManager {
         this.viewWait.until(ExpectedConditions.visibilityOf(visitorsListBtn));
         this.writeLog.info("Click on Visitor List button");
         this.visitorsListBtn.click();
+    }
+
+    public void clickHolidayCard(){
+        this.viewWait.until(ExpectedConditions.visibilityOf(holidayCardBtn));
+        this.writeLog.info("Click on Holiday Card button");
+        this.holidayCardBtn.click();
     }
 }

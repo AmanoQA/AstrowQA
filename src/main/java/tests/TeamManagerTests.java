@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.Controls.Buttons;
 import pageObjects.Menu.TeamManager.ContextMenu;
 import pageObjects.Menu.Operations;
+import pageObjects.WebPages.AddEditBookingPage;
 import pageObjects.WebPages.LoginPage;
 import pageObjects.WebPages.TeamManagerPage;
 import utils.ExtentManager;
@@ -87,6 +88,7 @@ public class TeamManagerTests extends ExtentManager {
         TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
 
         loginPage.doLogin("hr", "");
 
@@ -97,7 +99,7 @@ public class TeamManagerTests extends ExtentManager {
         teamManagerPage.clickSearchedElementInTMTable("AGACHE MIHAI", 4);
 
         contextMenu.clickAddBooking();
-        teamManagerPage.addBooking("1025", "C");
+        addEditBookingPage.addBooking("1025", "C");
         teamManagerPage.waitPageToBeLoaded();
         buttons.clickOK();
 

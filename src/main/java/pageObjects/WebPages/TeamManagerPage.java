@@ -51,21 +51,6 @@ public class TeamManagerPage {
     @FindBy(xpath = "//*[contains(text(),'Loading')]")
     private WebElement loading;
 
-    @FindBy(xpath = "//*[contains(@name,'booktime')]")
-    private WebElement bookingTime;
-
-    @FindBy(xpath = "//*[contains(@class,'clsBtnBooking')]")
-    private WebElement saveBookingBtn;
-
-    @FindBy(xpath = "//*[contains(@class,'clsPrevoiusBookingDay')]")
-    private WebElement previousBookingDay;
-
-    @FindBy(xpath = "//*[contains(@class,'clsTodayBookingDay')]")
-    private WebElement todayBookingDay;
-
-    @FindBy(xpath = "//*[contains(@class,'clsNextBookingDay')]")
-    private WebElement nextBookingDay;
-
     // constructor
     public TeamManagerPage(WebDriver d, WebDriverWait w, ExtentTest l) {
 
@@ -196,31 +181,6 @@ public class TeamManagerPage {
         enterTime.enterTime(customTime, time, "no");
 
         this.writeLog.info("Set CustomTime: " + time);
-    }
-
-    public void addBooking(String time, String day){
-        this.tmPageWait.until(ExpectedConditions.elementToBeClickable(bookingTime));
-        EnterTime enterTime = new EnterTime(this.tmPageDriver, this.tmPageWait);
-        enterTime.enterTime(bookingTime, time, "no");
-
-        switch (day){
-            case "P":
-                previousBookingDay.click();
-                break;
-
-            case "C":
-                todayBookingDay.click();
-                break;
-
-            case "N":
-                nextBookingDay.click();
-                break;
-
-            default:
-                todayBookingDay.click();
-        }
-
-        saveBookingBtn.click();
     }
 
 

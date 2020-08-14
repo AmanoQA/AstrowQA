@@ -50,11 +50,14 @@ public class SearchInTable {
                 int columns_count = columns_row.size();
 
                 //Loop will execute till the last cell of that specific row
-                for (int column = 0; column < columns_count; column++) {
+                for (WebElement webElement : columns_row) {
 
                     // Retrieve text from that specific cell
-                    String cellText = columns_row.get(column).getText();
-                    boolean isSelected = columns_row.get(column).isSelected();
+                    String cellText = webElement.getText();
+                    boolean isSelected = webElement.isSelected();
+
+                    //if View Deleted Data = Yes
+                    //if (cellText.equals(searchedItem) && !(rows_table.get(row).getAttribute("class").contains("clsDeletedDefinitionRow"))) {
 
                     if (cellText.equals(searchedItem)) {
                         found_row_index = row;
@@ -68,7 +71,6 @@ public class SearchInTable {
 
             //If column_index != 0, it will search only the the given column
 
-            outloop:
             for (row = 1; row < rows_count; row++) {
 
                 //Locate cells of a specific row
@@ -77,10 +79,13 @@ public class SearchInTable {
                 //Retrieve text from that specific cell
                 String cellText = columns_row.get(column_index).getText();
 
+                //if View Deleted Data = Yes
+                //if (cellText.equals(searchedItem) && !(rows_table.get(row).getAttribute("class").contains("clsDeletedDefinitionRow"))) {
+
                 if (cellText.equals(searchedItem)) {
                     found_row_index = row;
                     this.writeLog.info(searchedItem + " was found in the list");
-                    break outloop;
+                    break;
                 }
 
             }

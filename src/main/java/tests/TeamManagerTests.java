@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class TeamManagerTests extends ExtentManager {
 
-    @Test
+    @Test(priority = 1)
     public void addAbsenceAdjustToNormtime() throws InterruptedException {
         this.createTestReport("Add Absence with \"(1) Adjust to normtime\" for an employee", "Employee: ACHIM ALIN, day: 6, Absence - Blood Donation");
 
@@ -32,7 +32,6 @@ public class TeamManagerTests extends ExtentManager {
         //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
 
         contextMenu.clickAddAbsence();
-        teamManagerPage.waitPageToBeLoaded();
 
         teamManagerPage.selectAbsence(1, "Blood donation");
         teamManagerPage.selectAuthTime(2, "(1) Adjust to normtime");
@@ -41,12 +40,12 @@ public class TeamManagerTests extends ExtentManager {
 
         teamManagerPage.waitPageToBeLoaded();
 
-        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 6, "BD"));
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 6, "BD"), "Absence not found");
 
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void addAbsenceCustomTime() throws InterruptedException {
         this.createTestReport("Add Absence with \"(h) Custom time\" for an employee", "Employee: ACHIM ALIN, day: 7, Absence - Business trip");
 
@@ -75,11 +74,11 @@ public class TeamManagerTests extends ExtentManager {
 
         teamManagerPage.waitPageToBeLoaded();
 
-        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 7, "BT"));
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 7, "BT"), "Absence not found");
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void addBooking() throws InterruptedException {
         this.createTestReport("Add booking for an employee", "Employee: AGACHE MIHAI, day: 4, Booking - 10:25");
 
@@ -102,12 +101,12 @@ public class TeamManagerTests extends ExtentManager {
         teamManagerPage.waitPageToBeLoaded();
         buttons.clickOK();
 
-        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 4, "10:25"));
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 4, "10:25"), "Booking not found");
 
     }
 
-    @Test
-    public void checkBookingForEmployee() throws InterruptedException {
+    @Test(priority = 1)
+    public void checkBookingForEmployee(){
         this.createTestReport("Check Booking on an Employee", "Employee: ACHIM ALIN, day: 10, booking: 15:25");
 
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
@@ -124,11 +123,11 @@ public class TeamManagerTests extends ExtentManager {
         teamManagerPage.waitPageToBeLoaded();
 
         //teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU");
-        teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 10, "15:25");
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 10, "15:25"), "Booking not found");
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void selectDateFromCalendar() throws InterruptedException {
         this.createTestReport("Select date from calendar", "Select a date from calendar and click on Apply button");
 

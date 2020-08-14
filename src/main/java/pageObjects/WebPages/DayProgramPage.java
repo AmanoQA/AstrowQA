@@ -368,8 +368,11 @@ public class DayProgramPage {
         String messageDisplayed = this.message.getText();
 
         if (messageDisplayed.equals(messageToBeChecked)){
-            this.writeLog.info("Validation message is connect: " + messageToBeChecked);
+            this.writeLog.info("Validation message is connect: " + "\" " + messageToBeChecked + " \"");
             isDisplayed = true;
+        }
+        else {
+            this.writeLog.error("Validation message " + "\" " + messageToBeChecked + " \"" + " was not displayed ");
         }
         return isDisplayed;
     }
@@ -384,6 +387,7 @@ public class DayProgramPage {
 
         int row = searchInTable.searchItem(dpTable, column_index, searchedItem);
         if (row == -1){
+            this.writeLog.error("Element " + searchedItem + " not found");
             return;
         }
 
@@ -408,7 +412,7 @@ public class DayProgramPage {
         int row = searchInTable.searchItem(dpTable, column_index, searchedItem);
         //If the item searched is not found, it will return false
         if (row == -1){
-            this.writeLog.info("Item \"" + searchedItem + "\" NOT found in column " + column_index);
+            this.writeLog.error("Item \"" + searchedItem + "\" NOT found in column " + column_index);
             isPresent = false;
             return isPresent;
         }

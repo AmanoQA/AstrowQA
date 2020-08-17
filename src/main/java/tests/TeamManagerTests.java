@@ -4,9 +4,11 @@ import org.testng.annotations.Test;
 import pageObjects.Controls.Buttons;
 import pageObjects.Menu.TeamManager.ContextMenu;
 import pageObjects.Menu.Operations;
+import pageObjects.WebPages.AddEditAbsencePage;
 import pageObjects.WebPages.AddEditBookingPage;
 import pageObjects.WebPages.LoginPage;
 import pageObjects.WebPages.TeamManagerPage;
+import utils.AppParams;
 import utils.ExtentManager;
 
 import static org.testng.Assert.assertTrue;
@@ -21,9 +23,10 @@ public class TeamManagerTests extends ExtentManager {
         Operations operations = new Operations(this.driver, this.wait, writeLog.get());
         TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
-        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        //Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditAbsencePage addEditAbsencePage = new AddEditAbsencePage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
@@ -33,11 +36,11 @@ public class TeamManagerTests extends ExtentManager {
         //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
 
         contextMenu.clickAddAbsence();
+        addEditAbsencePage.addAbsence("Blood donation", "(1) Adjust to normtime");
 
-        teamManagerPage.selectAbsence(1, "Blood donation");
-        teamManagerPage.selectAuthTime(2, "(1) Adjust to normtime");
-
-        buttons.clickSave();
+//        addEditAbsencePage.selectAbsence(1, "Blood donation");
+//        addEditAbsencePage.selectAuthTime(2, "(1) Adjust to normtime");
+//        buttons.clickSave();
 
         teamManagerPage.waitPageToBeLoaded();
 
@@ -54,24 +57,25 @@ public class TeamManagerTests extends ExtentManager {
         Operations operations = new Operations(this.driver, this.wait, writeLog.get());
         TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
-        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        //Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditAbsencePage addEditAbsencePage = new AddEditAbsencePage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
         teamManagerPage.waitPageToBeLoaded();
-
 
         teamManagerPage.clickSearchedElementInTMTable("ACHIM ALIN", 7);
         //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
 
         contextMenu.clickAddAbsence();
 
-        teamManagerPage.selectAbsence(1, "Business trip");
-        teamManagerPage.selectAuthTime(2, "(h) Custom time", "0745");
+        addEditAbsencePage.addAbsence("Business trip", "(h) Custom time", "0745");
 
-        buttons.clickSave();
+//        addEditAbsencePage.selectAbsence(1, "Business trip");
+//        addEditAbsencePage.selectAuthTime(2, "(h) Custom time", "0745");
+//        buttons.clickSave();
 
         teamManagerPage.waitPageToBeLoaded();
 
@@ -90,7 +94,7 @@ public class TeamManagerTests extends ExtentManager {
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
         AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
@@ -117,7 +121,7 @@ public class TeamManagerTests extends ExtentManager {
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
@@ -139,7 +143,7 @@ public class TeamManagerTests extends ExtentManager {
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();

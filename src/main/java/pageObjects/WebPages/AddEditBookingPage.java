@@ -40,7 +40,7 @@ public class AddEditBookingPage {
         this.writeLog = l;
     }
 
-    public void addBooking(String time, String day){
+    public void addBooking(String time, String day) throws InterruptedException {
         this.bkPageWait.until(ExpectedConditions.elementToBeClickable(bookingTime));
         EnterTime enterTime = new EnterTime(this.bkPageDriver, this.bkPageWait);
         enterTime.enterTime(bookingTime, time, "no");

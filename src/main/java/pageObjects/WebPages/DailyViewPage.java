@@ -1,12 +1,14 @@
 package pageObjects.WebPages;
 
 import com.aventstack.extentreports.ExtentTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.Controls.SearchInTable;
 
 public class DailyViewPage {
 
@@ -64,6 +66,13 @@ public class DailyViewPage {
 
     @FindBy(xpath = "//*[contains(@id, 'bookingview')]//*[contains(@id, 'gridview')]/table/tbody")
     private WebElement bookingViewTable;
+
+
+    @FindBy(xpath = "//*[contains(text(),'Please wait')]")
+    private WebElement pleaseWait;
+
+    @FindBy(xpath = "//*[contains(text(),'Loading')]")
+    private WebElement loading;
 
 
     // constructor
@@ -144,4 +153,103 @@ public class DailyViewPage {
         this.writeLog.info("Click \"Edit Absence\" ");
         this.editAbsenceBtn.click();
     }
+
+    public boolean checkIfBookingIsPresent(String searchedBooking){
+        boolean isPresent = true;
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(bookingViewTable));
+        SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
+
+        int row = searchInTable.searchItem(bookingViewTable, 6, searchedBooking);
+        if (row == -1){
+            this.writeLog.error("Item \"" + searchedBooking + "\" NOT found in column ");
+            isPresent = false;
+            return isPresent;
+        }
+        else
+            this.writeLog.info("Item \"" + searchedBooking + "\" found in searched column ");
+
+        return isPresent;
+
+    }
+
+    public void clickSearchedBooking(String searchedBooking){
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(bookingViewTable));
+        SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
+
+        int row = searchInTable.searchItem(bookingViewTable, 6, searchedBooking);
+        if (row == -1){
+            this.writeLog.error("Item \"" + searchedBooking + "\" NOT found in column ");
+        }
+        else
+            this.writeLog.info("Item \"" + searchedBooking + "\" found in searched column ");
+
+        WebElement tableElement = bookingViewTable.findElements(By.tagName("tr")).get(row).findElements(By.tagName("td")).get(6);
+        this.writeLog.info("Find the " + searchedBooking + " and click on it");
+        tableElement.click();
+
+    }
+
+    public boolean checkIfAbsenceIsPresent(String searchedAbsence){
+        boolean isPresent = true;
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(absenceViewTable));
+        SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
+
+        int row = searchInTable.searchItem(absenceViewTable, 1, searchedAbsence);
+        if (row == -1){
+            this.writeLog.error("Item \"" + searchedAbsence + "\" NOT found in column ");
+            isPresent = false;
+            return isPresent;
+        }
+        else
+            this.writeLog.info("Item \"" + searchedAbsence + "\" found in searched column ");
+
+        return isPresent;
+
+    }
+
+
+    public void clickSearchedAbsence(String searchedAbsence){
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(absenceViewTable));
+        SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
+
+        int row = searchInTable.searchItem(absenceViewTable, 1, searchedAbsence);
+        if (row == -1){
+            this.writeLog.error("Item \"" + searchedAbsence + "\" NOT found in column ");
+        }
+        else
+            this.writeLog.info("Item \"" + searchedAbsence + "\" found in searched column ");
+
+        WebElement tableElement = absenceViewTable.findElements(By.tagName("tr")).get(row).findElements(By.tagName("td")).get(1);
+        this.writeLog.info("Find the " + searchedAbsence + " and click on it");
+        tableElement.click();
+
+    }
+
+    public void waitPageToBeLoaded() {
+
+        try {
+            this.dvPageWait.until(ExpectedConditions.visibilityOf(loading));
+        }
+        catch(Exception ignored) {
+        }
+
+        try {
+            this.dvPageWait.until(ExpectedConditions.visibilityOf(pleaseWait));
+        }
+        catch(Exception ignored) {
+        }
+
+        try {
+            while ((dvPageDriver.findElement(By.xpath("//*[contains(text(),'Please wait')]")).isDisplayed()) | (dvPageDriver.findElement(By.xpath("//*[contains(text(),'Loading')]")).isDisplayed())){
+                Thread.sleep(2000);
+            }
+        }
+        catch(Exception ignored) {
+        }
+    }
+
 }

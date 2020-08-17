@@ -27,18 +27,6 @@ public class TeamManagerPage {
     @FindBy(xpath = "//div[contains(@id, 'teammanager')]//*[contains(@id, 'dataview')]/table/tbody")
     private WebElement tmDataView;
 
-    @FindBy(xpath = "(//div[@class='x-form-trigger-wrap']/div[1])[6]")
-    private WebElement absenceClick;
-
-    @FindBy(xpath = "(//div[@class='x-form-trigger-wrap']/div[1])[7]")
-    private WebElement authTimeClick;
-
-    @FindBy(xpath = "//div[contains(@id, 'timefieldpick')]/div/input")
-    private WebElement customTime;
-
-    @FindBy(xpath = "//div[@class = 'list-ct']/ul")
-    private List<WebElement> dropDownList;
-
     @FindBy(xpath = "(//div[@class = 'x-form-item-body ']/div)[2]")
     private WebElement calendarBtn;
 
@@ -137,54 +125,8 @@ public class TeamManagerPage {
 
     }
 
-    public void selectAbsence(int index, String absence) throws InterruptedException {
 
-        this.tmPageWait.until(ExpectedConditions.visibilityOf(absenceClick));
-        this.writeLog.info("Open the Absence dropdown list");
-        absenceClick.click();
-        Thread.sleep(2000);
-        WebElement dropDownListElement = dropDownList.get(index-1);
-
-        DropDownWithoutNone dropDown = new DropDownWithoutNone(this.tmPageDriver, this.tmPageWait, this.writeLog);
-        this.writeLog.info("Select Absence: " + absence);
-        dropDown.dropDownSelect(dropDownListElement, absence);
-    }
-
-    public void selectAuthTime(int index, String authTime) throws InterruptedException {
-
-        this.tmPageWait.until(ExpectedConditions.visibilityOf(authTimeClick));
-        this.writeLog.info("Open the Absence dropdown list");
-        authTimeClick.click();
-        Thread.sleep(2000);
-        WebElement dropDownListElement = dropDownList.get(index-1);
-
-        DropDownWithoutNone dropDown = new DropDownWithoutNone(this.tmPageDriver, this.tmPageWait, this.writeLog);
-        this.writeLog.info("Select Absence: " + authTime);
-        dropDown.dropDownSelect(dropDownListElement, authTime);
-    }
-
-
-    public void selectAuthTime(int index, String authTime, String time) throws InterruptedException {
-
-        this.tmPageWait.until(ExpectedConditions.visibilityOf(authTimeClick));
-        this.writeLog.info("Open the Absence dropdown list");
-        authTimeClick.click();
-        Thread.sleep(2000);
-        WebElement dropDownListElement = dropDownList.get(index-1);
-
-        DropDownWithoutNone dropDown = new DropDownWithoutNone(this.tmPageDriver, this.tmPageWait, this.writeLog);
-        this.writeLog.info("Select Absence: " + authTime);
-        dropDown.dropDownSelect(dropDownListElement, authTime);
-
-        this.tmPageWait.until(ExpectedConditions.elementToBeClickable(customTime));
-        EnterTime enterTime = new EnterTime(this.tmPageDriver, this.tmPageWait);
-        enterTime.enterTime(customTime, time, "no");
-
-        this.writeLog.info("Set CustomTime: " + time);
-    }
-
-
-    public Boolean checkIfItemIsPresentInSelectedDay(String searchedEmployee, int day, String searchedItem){
+    public boolean checkIfItemIsPresentInSelectedDay(String searchedEmployee, int day, String searchedItem){
 
         boolean isPresent = false;
 

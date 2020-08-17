@@ -163,7 +163,7 @@ public class DayProgramPage {
         this.nameField.sendKeys(name);
     }
 
-    public void setNormtime(String normtime) {
+    public void setNormtime(String normtime) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(normtimeField));
@@ -172,7 +172,7 @@ public class DayProgramPage {
         enterTime.enterTime(normtimeField, normtime, "yes");
     }
 
-    public void setCoreTime(String coreFrom, String coreTo) {
+    public void setCoreTime(String coreFrom, String coreTo) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(coreFromField));
@@ -184,7 +184,7 @@ public class DayProgramPage {
         enterTime.enterTime(coreToField, coreTo, "yes");
     }
 
-    public void setStandardTime(String standardFrom, String standardTo) {
+    public void setStandardTime(String standardFrom, String standardTo) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(stFromField));
@@ -196,7 +196,7 @@ public class DayProgramPage {
         enterTime.enterTime(stToField, standardTo, "yes");
     }
 
-    public void setDayEnding(String dayEnding) {
+    public void setDayEnding(String dayEnding) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(dayEndingField));
@@ -217,7 +217,7 @@ public class DayProgramPage {
         dropDown.dropDownSelect(dropDownListElement, overtime);
     }
 
-    public void setBalanceLimit(String balanceLimit) {
+    public void setBalanceLimit(String balanceLimit) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(balanceLimitField));
@@ -225,7 +225,7 @@ public class DayProgramPage {
         enterTime.enterTime(balanceLimitField, balanceLimit, "yes");
     }
 
-    public void setDayMin(String dayMin) {
+    public void setDayMin(String dayMin) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(dayMinField));
@@ -256,7 +256,7 @@ public class DayProgramPage {
         dropDown.dropDownSelect(dropDownListBK, break1);
     }
 
-    public void setBreak1Time(String break1From, String break1To) {
+    public void setBreak1Time(String break1From, String break1To) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(break1FromField));
@@ -282,7 +282,7 @@ public class DayProgramPage {
         dropDown.dropDownSelect(dropDownListRound, rounding);
     }
 
-    public void setRevisionDown1Time(String revisionDown1From, String revisionDown1To) {
+    public void setRevisionDown1Time(String revisionDown1From, String revisionDown1To) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(break1FromField));
@@ -294,7 +294,7 @@ public class DayProgramPage {
         enterTime.enterTime(revisionDown1ToField, revisionDown1To, "yes");
     }
 
-    public void setRevisionUP1Time(String revisionUP1From, String revisionUP1To) {
+    public void setRevisionUP1Time(String revisionUP1From, String revisionUP1To) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(break1FromField));
@@ -324,7 +324,7 @@ public class DayProgramPage {
         this.zonesTab.click();
     }
 
-    public void setZoneTime1(String zoneTime1) {
+    public void setZoneTime1(String zoneTime1) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(zoneTime1Field));
@@ -332,7 +332,7 @@ public class DayProgramPage {
         enterTime.enterTime(zoneTime1Field, zoneTime1, "yes");
     }
 
-    public void setZoneTime2(String zoneTime2) {
+    public void setZoneTime2(String zoneTime2) throws InterruptedException {
         EnterTime enterTime = new EnterTime(this.dpPageDriver, this.dpPageWait);
 
         this.dpPageWait.until(ExpectedConditions.visibilityOf(zoneTime2Field));

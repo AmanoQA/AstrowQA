@@ -6,6 +6,7 @@ import pageObjects.Menu.Configuration;
 import pageObjects.Menu.Operations;
 import pageObjects.Menu.View;
 import pageObjects.WebPages.LoginPage;
+import utils.AppParams;
 import utils.ExtentManager;
 
 public class MenuTests extends ExtentManager {
@@ -16,7 +17,7 @@ public class MenuTests extends ExtentManager {
         Operations operations = new Operations(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         operations.clickOperation();
         operations.clickManageRequest();
@@ -44,7 +45,7 @@ public class MenuTests extends ExtentManager {
         View view = new View(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         view.clickView();
         view.clickDashboard();
@@ -65,7 +66,7 @@ public class MenuTests extends ExtentManager {
         Configuration configuration = new Configuration(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         configuration.clickConfiguration();
         configuration.clickEmployees();

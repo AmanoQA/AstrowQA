@@ -6,6 +6,7 @@ import pageObjects.ToolBars.TopSideBar;
 import pageObjects.WebPages.DayProgramPage;
 import pageObjects.Menu.Configuration;
 import pageObjects.WebPages.LoginPage;
+import utils.AppParams;
 import utils.ExtentManager;
 
 import static org.testng.Assert.assertTrue;
@@ -23,7 +24,7 @@ public class DayProgramTests extends ExtentManager {
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
@@ -53,7 +54,7 @@ public class DayProgramTests extends ExtentManager {
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
 
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
@@ -86,7 +87,7 @@ public class DayProgramTests extends ExtentManager {
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
 
@@ -120,7 +121,7 @@ public class DayProgramTests extends ExtentManager {
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
 
@@ -144,7 +145,7 @@ public class DayProgramTests extends ExtentManager {
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
 
@@ -165,7 +166,7 @@ public class DayProgramTests extends ExtentManager {
         DayProgramPage dayProgramPage = new DayProgramPage(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("hr", "");
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
 

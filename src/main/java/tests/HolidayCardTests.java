@@ -8,6 +8,7 @@ import pageObjects.Menu.View;
 import pageObjects.WebPages.HolidayCardPage;
 import pageObjects.WebPages.LoginPage;
 import pageObjects.WebPages.TeamManagerPage;
+import utils.AppParams;
 import utils.ExtentManager;
 
 public class HolidayCardTests extends ExtentManager {
@@ -19,7 +20,7 @@ public class HolidayCardTests extends ExtentManager {
         View view = new View(this.driver, this.wait, writeLog.get());
         HolidayCardPage holidayCardPage = new HolidayCardPage(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("eumarin", "");
+        loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         view.clickView();
         view.clickHolidayCard();
@@ -38,7 +39,7 @@ public class HolidayCardTests extends ExtentManager {
         HolidayCardPage holidayCardPage = new HolidayCardPage(this.driver, this.wait, writeLog.get());
         ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
 
-        loginPage.doLogin("eumarin", "");
+        loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();

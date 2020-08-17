@@ -2,6 +2,7 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 
+
 public abstract class DriverManager {
 
     protected WebDriver driver;
@@ -19,7 +20,15 @@ public abstract class DriverManager {
 
         if(null == driver){
             createWebDriver();
-            driver.get(AppParams.url);
+
+            if (AppParams.runOn.equals("cloud"))
+            {
+                driver.get(AppParams.urlCloud);
+            }
+            else {
+                driver.get(AppParams.url);
+            }
+
         }
         return driver;
     }

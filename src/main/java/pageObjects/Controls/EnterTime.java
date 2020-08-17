@@ -20,7 +20,7 @@ public class EnterTime {
         this.enterTimeWait = w;
     }
 
-    public void enterTime(WebElement field, String time, String click)  {
+    public void enterTime(WebElement field, String time, String click) throws InterruptedException {
 
         Actions actions = new Actions(this.enterTimeDriver);
         if (click.toLowerCase().equals("yes")){
@@ -29,6 +29,7 @@ public class EnterTime {
 
         for (int i = 0; i < time.length(); i++) {
             actions.moveToElement(field).sendKeys(String.valueOf(time.charAt(i))).perform();
+            Thread.sleep(175);
         }
     }
 

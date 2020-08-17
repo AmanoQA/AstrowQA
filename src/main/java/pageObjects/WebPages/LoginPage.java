@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AppParams;
+
 
 public class LoginPage  {
     private final WebDriver loginPageDriver;
@@ -28,6 +30,18 @@ public class LoginPage  {
     @FindBy(xpath = "//*[contains(text(),'Hello')]")
     private WebElement hello;
 
+    @FindBy(xpath = "//*[@id = 'login_domain']")
+    private WebElement domainCloudTextBox;
+
+    @FindBy(xpath = "//*[@id = 'login_username']")
+    private WebElement userNameCloudTextBox;
+
+    @FindBy(xpath = "//*[@id = 'login_password']")
+    private WebElement passwordCloudTextBox;
+
+    @FindBy(xpath = "//*[@id = 'loginButton']")
+    private WebElement loginCloudBtn;
+
 
     // constructor
     public LoginPage(WebDriver d, WebDriverWait w, ExtentTest l) {
@@ -38,17 +52,27 @@ public class LoginPage  {
         this.writeLog = l;
     }
 
-    public void login(String userName, String password){
-        this.setUserName(userName);
-        this.setPassword(password);
-        this.clickLogin();
+    public void login(String domainCloud, String userName, String password){
+
+        if (AppParams.runOn.equals("cloud")){
+            this.setDomainCloud(domainCloud);
+            this.setUserNameCloud(userName);
+            this.setPasswordCloud(password);
+            this.clickLoginCloud();
+        }
+
+        else {
+            this.setUserName(userName);
+            this.setPassword(password);
+            this.clickLogin();
+        }
     }
 
-    public void doLogin(String user, String password){
-        this.login(user,password);
+    public void doLogin(String domainCloud, String user, String password){
+        this.login(domainCloud, user,password);
     }
 
-    // ------------------------------------------------
+    // Local------------------------------------------------
     public void setUserName(String userName){
 
         this.loginPageWait.until(ExpectedConditions.visibilityOf(userNameTextBox));
@@ -69,6 +93,38 @@ public class LoginPage  {
         this.writeLog.info("Click on Login button");
         this.loginBtn.click();
     }
+
+    // Cloud------------------------------------------------
+
+    public void setDomainCloud(String domainCloud){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(domainCloudTextBox));
+        this.writeLog.info("Enter Domain: " + domainCloud);
+        this.domainCloudTextBox.sendKeys(domainCloud);
+    }
+
+    public void setUserNameCloud(String userNameCloud){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(userNameCloudTextBox));
+        this.writeLog.info("Enter UserName: " + userNameCloud);
+        this.userNameCloudTextBox.sendKeys(userNameCloud);
+    }
+
+
+    public void setPasswordCloud(String passwordCloud){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(passwordCloudTextBox));
+        this.writeLog.info("Enter Password: " + passwordCloud);
+        this.passwordCloudTextBox.sendKeys(passwordCloud);
+    }
+
+    public void clickLoginCloud(){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(loginCloudBtn));
+        this.writeLog.info("Click on Login button");
+        this.loginCloudBtn.click();
+    }
+    //---------------------------------------------------------
 
     public boolean checkAccount(String userName){
         boolean isLogIn;

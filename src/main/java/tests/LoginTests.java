@@ -3,6 +3,7 @@ package tests;
 import com.aventstack.extentreports.Status;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pageObjects.Controls.Buttons;
 import pageObjects.WebPages.LoginPage;
 import utils.AppParams;
 import utils.ExtentManager;
@@ -30,6 +31,24 @@ public class LoginTests extends ExtentManager {
         loginPage.doLogin(AppParams.domainCloud, "administrator", "1");
 
         assertTrue(loginPage.checkAccount("administrator"), "Not able to confirm the login");
+
+    }
+
+    @Test
+    public void checkRememberMe() throws InterruptedException {
+        this.createTestReport("Check remember me", "Check remember me Login option");
+        LoginPage loginPage= new LoginPage(this.driver, this.wait, writeLog.get());
+        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+
+        loginPage.setUserName("hr");
+        loginPage.setPassword("");
+        loginPage.clickRememberMe();
+        loginPage.clickLogin();
+
+        loginPage.clickLogout();
+        buttons.clickYes();
+
+        assertTrue(loginPage.checkRememberMe("hr"));
 
     }
 

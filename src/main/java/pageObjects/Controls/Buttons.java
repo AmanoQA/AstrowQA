@@ -27,6 +27,9 @@ public class Buttons {
     @FindBy(xpath = "//span[text() = 'OK']")
     private WebElement OKBtn;
 
+    @FindBy(xpath = "//span[text()='Yes']")
+    private WebElement yesBtn;
+
     // constructor
     public Buttons(WebDriver d, WebDriverWait w, ExtentTest l) {
 
@@ -66,6 +69,14 @@ public class Buttons {
         this.buttonsWait.until(ExpectedConditions.visibilityOf(OKBtn));
         this.writeLog.info("Click on OK");
         this.OKBtn.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickYes() throws InterruptedException {
+
+        this.buttonsWait.until(ExpectedConditions.visibilityOf(yesBtn));
+        this.writeLog.info("Click on Yes");
+        this.yesBtn.click();
         Thread.sleep(2000);
     }
 }

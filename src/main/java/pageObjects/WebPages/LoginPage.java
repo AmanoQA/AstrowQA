@@ -24,6 +24,9 @@ public class LoginPage  {
     @FindBy(xpath = "//span[text()='Login']")
     private WebElement loginBtn;
 
+    @FindBy(xpath = "//input[@type='button']")
+    private WebElement rememberMe;
+
     @FindBy(xpath = "//span[@class ='x-btn-inner clsTopLogout' and text()='Logout']")
     private WebElement logoutBtn;
 
@@ -41,6 +44,7 @@ public class LoginPage  {
 
     @FindBy(xpath = "//*[@id = 'loginButton']")
     private WebElement loginCloudBtn;
+
 
 
     // constructor
@@ -72,6 +76,12 @@ public class LoginPage  {
         this.login(domainCloud, user,password);
     }
 
+    public void clickLogout(){
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(logoutBtn));
+        this.writeLog.info("Click on Logout button");
+        this.logoutBtn.click();
+    }
+
     // Local------------------------------------------------
     public void setUserName(String userName){
 
@@ -92,6 +102,13 @@ public class LoginPage  {
         this.loginPageWait.until(ExpectedConditions.visibilityOf(loginBtn));
         this.writeLog.info("Click on Login button");
         this.loginBtn.click();
+    }
+
+    public void clickRememberMe(){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(rememberMe));
+        this.writeLog.info("Click on Remember me");
+        this.rememberMe.click();
     }
 
     // Cloud------------------------------------------------
@@ -134,6 +151,17 @@ public class LoginPage  {
         this.writeLog.info("Check if Logout button is displayed and \"Hello, "+ userName + "\" message is displayed");
 
         return isLogIn;
+    }
+
+    public boolean checkRememberMe(String checkUserName){
+
+        boolean isDisplayed = false;
+
+        if (this.loginPageDriver.manage().getCookieNamed("loginUser").getValue().equals(checkUserName)){
+            isDisplayed = true;
+            return isDisplayed;
+        }
+        return isDisplayed;
     }
 
 

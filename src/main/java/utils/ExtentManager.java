@@ -46,15 +46,15 @@ public class ExtentManager extends GenericDriver {
         this.reportName = "Test Report - "+ testedVersion +".html";
         //this.reportName = "Test Report - "+ testedVersion + "-" + formater.format(calendar.getTime())+ ".html";
 
-        this.extent = ExtentManager.createInstance(".\\src\\main\\reports\\" + this.reportName);
+        extent = ExtentManager.createInstance(".\\src\\main\\reports\\" + this.reportName);
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(".\\src\\main\\reports\\");
-        this.extent.attachReporter(htmlReporter);
+        extent.attachReporter(htmlReporter);
     }
 
     @BeforeClass
     public synchronized void beforeClass() {
-        ExtentTest parent = this.extent.createTest(getClass().getSimpleName());
-        this.parentTest.set(parent);
+        ExtentTest parent = extent.createTest(getClass().getSimpleName());
+        parentTest.set(parent);
     }
 
 //    @BeforeMethod
@@ -70,7 +70,7 @@ public class ExtentManager extends GenericDriver {
             writeLog.get().log(Status.FAIL, MarkupHelper.createLabel("Test Case: " + result.getName() + " - FAILED due to below issues:", ExtentColor.RED));
             writeLog.get().fail(result.getThrowable().getMessage());
             //get screenshot with the error
-            writeLog.get().fail("Snapshot below: " + this.writeLog.get().addScreenCaptureFromPath(this.capture(this.driver, method)));
+            writeLog.get().fail("Snapshot below: " + writeLog.get().addScreenCaptureFromPath(this.capture(method)));
         }
         else if (result.getStatus() == ITestResult.SKIP){
             writeLog.get().log(Status.SKIP, MarkupHelper.createLabel("Test Case: " + result.getName()+" - SKIPPED",ExtentColor.ORANGE));
@@ -92,7 +92,7 @@ public class ExtentManager extends GenericDriver {
     // -------------------------------------------------------------------------------------------------------
     // Private methods
 
-    private String capture(WebDriver driver, Method method) throws IOException {
+    private String capture( Method method) throws IOException {
 
         File screenFile = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
         String path = (".\\src\\main\\reports\\ErrorScreenshots\\" + method.getName()+ "-" + formater.format(calendar.getTime()) + ".png");

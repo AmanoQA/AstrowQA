@@ -42,7 +42,8 @@ public class TeamManagerTests extends ExtentManager {
 //        addEditAbsencePage.selectAuthTime(2, "(1) Adjust to normtime");
 //        buttons.clickSave();
 
-        teamManagerPage.waitPageToBeLoaded();
+        //teamManagerPage.waitPageToBeLoaded();
+        this.waitPageToBeLoaded();
 
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 6, "BD"), "Absence not found");
 

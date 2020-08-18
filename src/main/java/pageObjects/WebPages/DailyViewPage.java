@@ -18,6 +18,27 @@ public class DailyViewPage {
     private final WebDriverWait dvPageWait;
     private final ExtentTest writeLog;
 
+    //toolbar---------------------------------------------------------
+
+    @FindBy(xpath = "(//*[contains(@id, 'toolbar')]//*[contains(@class,'clsAddNewItem')])[1]")
+    private WebElement addNote;
+
+    @FindBy(xpath = "//*[contains(@id, 'toolbar')]//*[contains(@class,'clsAddNote')]")
+    private WebElement notesList;
+
+    @FindBy(xpath = "//*[contains(@id, 'toolbar')]//*[contains(@class,'clsDepartmentRegistration')]")
+    private WebElement registerDepartment;
+
+    @FindBy(xpath = "//*[contains(@id, 'toolbar')]//*[contains(@class,'clsDataCollection')]")
+    private WebElement dataCollection;
+
+    @FindBy(xpath = "(//*[contains(@id, 'toolbar')]//*[contains(@class,'clsRefreshList')])[1]")
+    private WebElement refreshToolbar;
+
+    @FindBy(xpath = "(//*[contains(@id, 'toolbar')]//*[contains(@class,'clsRefreshList')])[2]")
+    private WebElement refreshCounters;
+
+
     //Bookings---------------------------------------------------------
 
     @FindBy(xpath = "//*[contains(@id, 'bookingview')]//*[contains(text(),'New')]")
@@ -81,7 +102,7 @@ public class DailyViewPage {
     @FindBy(xpath = "//*[contains(text(),'Loading')]")
     private WebElement loading;
 
-    //*[contains(@id, 'absenceview')]//*[contains(@id, 'gridview')]/child::*"
+
 
 
     // constructor
@@ -113,6 +134,44 @@ public class DailyViewPage {
         } catch (Exception ignored) {
         }
     }
+
+    //ToolBar----------------------------------------------------------
+    public void clickAddNote() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(addNote));
+        this.writeLog.info("Click \"Add Note\" ");
+        this.addNote.click();
+    }
+
+    public void clickNotes() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(notesList));
+        this.writeLog.info("Click \"Notes\" ");
+        this.notesList.click();
+    }
+
+    public void clickRegisterDepartment() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(registerDepartment));
+        this.writeLog.info("Click \"Register Department\" ");
+        this.registerDepartment.click();
+    }
+
+    public void clickDataCollection() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(dataCollection));
+        this.writeLog.info("Click \"Data Collection\" ");
+        this.dataCollection.click();
+    }
+
+    public void clickRefreshToolbar() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(refreshToolbar));
+        this.writeLog.info("Click \"Refresh from Toolbar\" ");
+        this.refreshToolbar.click();
+    }
+
+    public void clickRefreshCounters() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(refreshCounters));
+        this.writeLog.info("Click \"Refresh Counters\" ");
+        this.refreshCounters.click();
+    }
+
 
     //Bookings---------------------------------------------------------
 

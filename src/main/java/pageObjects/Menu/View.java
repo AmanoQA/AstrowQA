@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ExtentManager;
 
-public class View extends ExtentManager {
+public class View {
 
     private final WebDriver viewDriver;
     private final WebDriverWait viewWait;

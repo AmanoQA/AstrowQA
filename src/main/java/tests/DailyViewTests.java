@@ -21,18 +21,18 @@ public class DailyViewTests extends ExtentManager {
         AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
         DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
 
-
         loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 12);
         contextMenu.clickDailyView();
         dailyViewPage.clickNewBooking();
         addEditBookingPage.addBooking("1425", "C");
-        dailyViewPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
+
         assertTrue(dailyViewPage.checkIfBookingIsPresent("14:25"));
 
     }
@@ -47,23 +47,23 @@ public class DailyViewTests extends ExtentManager {
         AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
         DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
 
-
         loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 12);
         contextMenu.clickDailyView();
         dailyViewPage.clickNewBooking();
         addEditBookingPage.addBooking("1425", "C");
-        dailyViewPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         dailyViewPage.clickSearchedBooking("14:25");
         dailyViewPage.clickEditBooking();
         addEditBookingPage.addBooking("1545", "C");
-        dailyViewPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
+
         assertTrue(dailyViewPage.checkIfBookingIsPresent("15:45"));
 
     }
@@ -78,12 +78,11 @@ public class DailyViewTests extends ExtentManager {
         AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
         DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
 
-
         loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 12);
         contextMenu.clickDailyView();
@@ -102,18 +101,18 @@ public class DailyViewTests extends ExtentManager {
         AddEditAbsencePage addEditAbsencePage = new AddEditAbsencePage(this.driver, this.wait, writeLog.get());
         DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
 
-
         loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 12);
         contextMenu.clickDailyView();
         dailyViewPage.clickNewAbsence();
         addEditAbsencePage.addAbsence("Business trip", "(h) Custom time", "05:45");
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
+
         assertTrue(dailyViewPage.checkIfAbsenceIsPresent("Business trip"));
 
     }
@@ -128,23 +127,20 @@ public class DailyViewTests extends ExtentManager {
         AddEditAbsencePage addEditAbsencePage = new AddEditAbsencePage(this.driver, this.wait, writeLog.get());
         DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
 
-
         loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 10);
         contextMenu.clickDailyView();
         dailyViewPage.clickNewAbsence();
         addEditAbsencePage.addAbsence("Business trip", "(h) Custom time", "05:45");
-        //teamManagerPage.waitPageToBeLoaded();
 
         dailyViewPage.clickSearchedAbsence("Business trip");
         dailyViewPage.clickEditAbsence();
         addEditAbsencePage.addAbsence("Medical leave", "(1) Adjust to normtime");
-        //teamManagerPage.waitPageToBeLoaded();
 
         assertTrue(dailyViewPage.checkIfAbsenceIsPresent("Medical leave"));
 

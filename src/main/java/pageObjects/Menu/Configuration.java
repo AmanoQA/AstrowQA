@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ExtentManager;
 
-public class Configuration extends ExtentManager {
+public class Configuration{
 
     private final WebDriver configurationDriver;
     private final WebDriverWait configurationWait;

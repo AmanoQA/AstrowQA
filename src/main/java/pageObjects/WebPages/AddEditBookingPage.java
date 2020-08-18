@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Controls.EnterTime;
+import utils.GenericDriver;
 
 public class AddEditBookingPage {
 
@@ -63,6 +64,7 @@ public class AddEditBookingPage {
         }
 
         saveBookingBtn.click();
+
     }
 
 }

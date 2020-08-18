@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ExtentManager;
+import utils.GenericDriver;
 
 public class Operations {
     private final WebDriver operationDriver;
@@ -82,6 +84,7 @@ public class Operations {
         this.writeLog.info("Click on Manage Request button");
         this.manageRequestBtn.click();
     }
+
     public void clickTeamManager(){
         this.operationWait.until(ExpectedConditions.visibilityOf(teamManagerBtn));
         this.writeLog.info("Click on Team Manager button");

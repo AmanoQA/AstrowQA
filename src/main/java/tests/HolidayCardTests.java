@@ -43,7 +43,7 @@ public class HolidayCardTests extends ExtentManager {
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 12);
         contextMenu.clickViewHolidayCard();

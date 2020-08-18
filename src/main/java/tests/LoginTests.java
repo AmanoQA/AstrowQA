@@ -8,6 +8,7 @@ import pageObjects.WebPages.LoginPage;
 import utils.AppParams;
 import utils.ExtentManager;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTests extends ExtentManager {
@@ -40,16 +41,30 @@ public class LoginTests extends ExtentManager {
         LoginPage loginPage= new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
-        loginPage.setUserName("hr");
-        loginPage.setPassword("");
-        loginPage.clickRememberMe();
-        loginPage.clickLogin();
+        loginPage.login(AppParams.domainCloud, "hr", "1", "check");
 
         loginPage.clickLogout();
         buttons.clickYes();
+        waitPageToBeLoaded();
 
-        assertTrue(loginPage.checkRememberMe("hr"));
+        assertTrue(loginPage.checkRememberMe("hr", "1"), "Not able to confirm Cookie");
 
     }
+
+//    @Test
+//    public void uncheckRememberMe() throws InterruptedException {
+//        this.createTestReport("Uncheck remember me", "Uncheck remember me Login option");
+//        LoginPage loginPage= new LoginPage(this.driver, this.wait, writeLog.get());
+//        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+//
+//        loginPage.login(AppParams.domainCloud, "hr", "1", "uncheck");
+//
+//        loginPage.clickLogout();
+//        buttons.clickYes();
+//        waitPageToBeLoaded();
+//
+//        assertFalse(loginPage.checkRememberMe("hr", "1"), "Not able to confirm Cookie");
+//
+//    }
 
 }

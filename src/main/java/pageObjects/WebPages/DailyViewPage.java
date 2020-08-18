@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Controls.SearchInTable;
+import utils.GenericDriver;
 
 public class DailyViewPage {
 
@@ -73,7 +74,6 @@ public class DailyViewPage {
 
     @FindBy(xpath = "//*[contains(text(),'Loading')]")
     private WebElement loading;
-
 
     // constructor
     public DailyViewPage(WebDriver d, WebDriverWait w, ExtentTest l) {
@@ -229,27 +229,5 @@ public class DailyViewPage {
 
     }
 
-    public void waitPageToBeLoaded() {
-
-        try {
-            this.dvPageWait.until(ExpectedConditions.visibilityOf(loading));
-        }
-        catch(Exception ignored) {
-        }
-
-        try {
-            this.dvPageWait.until(ExpectedConditions.visibilityOf(pleaseWait));
-        }
-        catch(Exception ignored) {
-        }
-
-        try {
-            while ((dvPageDriver.findElement(By.xpath("//*[contains(text(),'Please wait')]")).isDisplayed()) | (dvPageDriver.findElement(By.xpath("//*[contains(text(),'Loading')]")).isDisplayed())){
-                Thread.sleep(2000);
-            }
-        }
-        catch(Exception ignored) {
-        }
-    }
 
 }

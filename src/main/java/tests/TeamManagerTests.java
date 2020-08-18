@@ -30,7 +30,7 @@ public class TeamManagerTests extends ExtentManager {
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.checkPageIsReady();
+        checkPageIsReady();
 
         teamManagerPage.clickSearchedElementInTMTable("ACHIM ALIN", 6);
         //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
@@ -42,8 +42,7 @@ public class TeamManagerTests extends ExtentManager {
 //        addEditAbsencePage.selectAuthTime(2, "(1) Adjust to normtime");
 //        buttons.clickSave();
 
-        //teamManagerPage.waitPageToBeLoaded();
-        this.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 6, "BD"), "Absence not found");
 
@@ -65,7 +64,7 @@ public class TeamManagerTests extends ExtentManager {
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("ACHIM ALIN", 7);
         //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
@@ -78,7 +77,7 @@ public class TeamManagerTests extends ExtentManager {
 //        addEditAbsencePage.selectAuthTime(2, "(h) Custom time", "0745");
 //        buttons.clickSave();
 
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 7, "BT"), "Absence not found");
 
@@ -99,13 +98,13 @@ public class TeamManagerTests extends ExtentManager {
 
         operations.clickOperation();
         operations.clickTeamManager();
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.clickSearchedElementInTMTable("AGACHE MIHAI", 4);
 
         contextMenu.clickAddBooking();
         addEditBookingPage.addBooking("1025", "C");
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
         buttons.clickOK();
 
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 4, "10:25"), "Booking not found");
@@ -127,7 +126,7 @@ public class TeamManagerTests extends ExtentManager {
         operations.clickOperation();
         operations.clickTeamManager();
 
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         //teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU");
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 10, "15:25"), "Booking not found");
@@ -149,7 +148,7 @@ public class TeamManagerTests extends ExtentManager {
         operations.clickOperation();
         operations.clickTeamManager();
 
-        teamManagerPage.waitPageToBeLoaded();
+        waitPageToBeLoaded();
 
         teamManagerPage.selectDateFromTMCalendar(1, "29", "June", "2020");
         buttons.clickApply();

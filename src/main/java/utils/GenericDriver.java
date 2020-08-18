@@ -21,7 +21,7 @@ public class GenericDriver {
         this.driverManager = DriverManagerFactory.getDriverManager(AppParams.driverType);
         this.driver = this.driverManager.getWebDriver();
         this.wait = new WebDriverWait(this.driver, 30);
-        this.wait.until(webDriver -> ((JavascriptExecutor) this.driver).executeScript("return document.readyState").equals("complete"));
+        this.wait.until(webDriver -> ((JavascriptExecutor) this.driver).executeScript("return document.readyState").equals("complete") && ((JavascriptExecutor) this.driver).executeScript("return document.visibilityState").equals("visible"));
     }
 
     @AfterMethod
@@ -29,25 +29,6 @@ public class GenericDriver {
 
         this.driverManager.quitWebDriver();
     }
-
-//    public void waitForPageLoaded() {
-//
-//        ExpectedCondition<Boolean> expectation = new
-//                ExpectedCondition<Boolean>() {
-//                    public Boolean apply(WebDriver driver) {
-//                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
-//
-//                    }
-//                };
-//
-//        try {
-//            Thread.sleep(2000);
-//            //WebDriverWait wait = new WebDriverWait(this.driver, 30);
-//            this.wait.until(expectation);
-//        } catch (Throwable error) {
-//            Assert.fail("Timeout waiting for Page Load Request to complete.");
-//        }
-//    }
 
 
     @FindBy(xpath = "//*[contains(text(),'Please wait')]")
@@ -71,13 +52,25 @@ public class GenericDriver {
         }
 
         try {
-            while ((this.driver.findElement(By.xpath("//*[contains(text(),'Please wait')]")).isDisplayed()) | (this.driver.findElement(By.xpath("//*[contains(text(),'Loading')]")).isDisplayed())){
-                Thread.sleep(2000);
+            while ((loading.isDisplayed()) | (pleaseWait.isDisplayed())){
+
+                Thread.sleep(1000);
             }
         }
         catch(Exception ignored) {
         }
     }
 
+
+    public void checkPageIsReady() {
+
+        JavascriptExecutor js = (JavascriptExecutor) this.driver;
+
+        //check ready state  - complete and visibilityState - visible
+        if ((js.executeScript("return document.visibilityState").toString().equals("visible")) && (js.executeScript("return document.readyState").toString().equals("complete"))) {
+            System.out.println("Page Is loaded.");
+            //return;
+        }
+    }
 
 }

@@ -21,11 +21,11 @@ public class LoginPage  {
     @FindBy(xpath = "//input[@placeholder='Password']")
     private WebElement passwordTextBox;
 
-    @FindBy(xpath = "//span[text()='Login']")
-    private WebElement loginBtn;
-
     @FindBy(xpath = "//input[@type='button']")
     private WebElement rememberMe;
+
+    @FindBy(xpath = "//span[text()='Login']")
+    private WebElement loginBtn;
 
     @FindBy(xpath = "//span[@class ='x-btn-inner clsTopLogout' and text()='Logout']")
     private WebElement logoutBtn;
@@ -42,9 +42,11 @@ public class LoginPage  {
     @FindBy(xpath = "//*[@id = 'login_password']")
     private WebElement passwordCloudTextBox;
 
+    @FindBy(xpath = "//*[@id = 'imgRememberMe']")
+    private WebElement rememberMeCloud;
+
     @FindBy(xpath = "//*[@id = 'loginButton']")
     private WebElement loginCloudBtn;
-
 
 
     // constructor
@@ -68,6 +70,24 @@ public class LoginPage  {
         else {
             this.setUserName(userName);
             this.setPassword(password);
+            this.clickLogin();
+        }
+    }
+
+    public void login(String domainCloud, String userName, String password, String rememberMeCheck){
+
+        if (AppParams.runOn.equals("cloud")){
+            this.setDomainCloud(domainCloud);
+            this.setUserNameCloud(userName);
+            this.setPasswordCloud(password);
+            this.clickRememberMeCloud(rememberMeCheck);
+            this.clickLoginCloud();
+        }
+
+        else {
+            this.setUserName(userName);
+            this.setPassword(password);
+            this.clickRememberMe(rememberMeCheck);
             this.clickLogin();
         }
     }
@@ -104,11 +124,42 @@ public class LoginPage  {
         this.loginBtn.click();
     }
 
-    public void clickRememberMe(){
+    public void clickRememberMe(String option){
 
         this.loginPageWait.until(ExpectedConditions.visibilityOf(rememberMe));
-        this.writeLog.info("Click on Remember me");
-        this.rememberMe.click();
+
+        if(option.equals("check")) {
+            if (rememberMe.getAttribute("aria-checked").equals("false")){
+                this.writeLog.info("Remember me: " + option);
+                this.rememberMe.click();
+            }
+        }
+        else if(option.equals("uncheck")){
+            if (rememberMe.getAttribute("aria-checked").equals("true")){
+                this.writeLog.info("Remember me: " + option);
+                this.rememberMe.click();
+            }
+        }
+
+    }
+
+    public void clickRememberMeCloud(String option){
+
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(rememberMeCloud));
+
+        if(option.equals("check")) {
+            if (rememberMeCloud.getAttribute("class").equals("divCheckbox ckunchecked")){
+                this.writeLog.info("Remember me: " + option);
+                this.rememberMeCloud.click();
+            }
+        }
+        else if(option.equals("uncheck")){
+            if (rememberMeCloud.getAttribute("class").equals("divCheckbox ckchecked")){
+                this.writeLog.info("Remember me: " + option);
+                this.rememberMeCloud.click();
+            }
+        }
+
     }
 
     // Cloud------------------------------------------------
@@ -153,11 +204,13 @@ public class LoginPage  {
         return isLogIn;
     }
 
-    public boolean checkRememberMe(String checkUserName){
+    public boolean checkRememberMe(String checkUserName, String checkPassword){
 
         boolean isDisplayed = false;
 
-        if (this.loginPageDriver.manage().getCookieNamed("loginUser").getValue().equals(checkUserName)){
+        if ((this.loginPageDriver.manage().getCookieNamed("loginUser").getValue().equals(checkUserName)) &&
+                (this.loginPageDriver.manage().getCookieNamed("loginPassword").getValue().equals(checkPassword)) &&
+                (this.loginPageDriver.manage().getCookieNamed("loginRemember").getValue().equals("true"))){
             isDisplayed = true;
             return isDisplayed;
         }

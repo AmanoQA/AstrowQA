@@ -61,42 +61,6 @@ public class TeamManagerPage {
         calendar.selectDateFromCalendar(calendarListElement, day, month, year);
     }
 
-
-
-    public void waitPageToBeLoaded() {
-
-        try {
-            this.tmPageWait.until(ExpectedConditions.visibilityOf(loading));
-        }
-        catch(Exception ignored) {
-        }
-
-        try {
-            this.tmPageWait.until(ExpectedConditions.visibilityOf(pleaseWait));
-        }
-        catch(Exception ignored) {
-        }
-
-        try {
-            while ((tmPageDriver.findElement(By.xpath("//*[contains(text(),'Please wait')]")).isDisplayed()) | (tmPageDriver.findElement(By.xpath("//*[contains(text(),'Loading')]")).isDisplayed())){
-                Thread.sleep(2000);
-            }
-        }
-        catch(Exception ignored) {
-        }
-    }
-
-
-    public void checkPageIsReady() {
-
-        JavascriptExecutor js = (JavascriptExecutor) this.tmPageDriver;
-
-        //check ready state  - complete and visibilityState - visible
-        if ((js.executeScript("return document.visibilityState").toString().equals("visible")) && (js.executeScript("return document.readyState").toString().equals("complete"))) {
-            System.out.println("Page Is loaded.");
-            //return;
-        }
-    }
         public void clickCalendar() {
 
         this.tmPageWait.until(ExpectedConditions.elementToBeClickable(calendarBtn));

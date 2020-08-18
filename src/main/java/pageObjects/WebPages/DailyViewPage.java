@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Controls.SearchInTable;
+import utils.ExtentManager;
 import utils.GenericDriver;
 
 public class DailyViewPage {
@@ -65,15 +66,23 @@ public class DailyViewPage {
     @FindBy(xpath = "//*[contains(@id, 'absenceview')]//*[contains(@id, 'gridview')]/table/tbody")
     private WebElement absenceViewTable;
 
+    @FindBy(xpath = "//*[contains(@id, 'absenceview')]//*[contains(@id, 'gridview')]/child::*")
+    private WebElement noRowsAbsenceTable;
+
     @FindBy(xpath = "//*[contains(@id, 'bookingview')]//*[contains(@id, 'gridview')]/table/tbody")
     private WebElement bookingViewTable;
 
+    @FindBy(xpath = "//*[contains(@id, 'bookingview')]//*[contains(@id, 'gridview')]/child::*")
+    private WebElement noRowsBookingTable;
 
     @FindBy(xpath = "//*[contains(text(),'Please wait')]")
     private WebElement pleaseWait;
 
     @FindBy(xpath = "//*[contains(text(),'Loading')]")
     private WebElement loading;
+
+    //*[contains(@id, 'absenceview')]//*[contains(@id, 'gridview')]/child::*"
+
 
     // constructor
     public DailyViewPage(WebDriver d, WebDriverWait w, ExtentTest l) {
@@ -82,6 +91,27 @@ public class DailyViewPage {
         this.dvPageDriver = d;
         this.dvPageWait = w;
         this.writeLog = l;
+    }
+
+    public void waitPageToBeLoaded() {
+
+        try {
+            this.dvPageWait.until(ExpectedConditions.visibilityOf(loading));
+        } catch (Exception ignored) {
+        }
+
+        try {
+            this.dvPageWait.until(ExpectedConditions.visibilityOf(pleaseWait));
+        } catch (Exception ignored) {
+        }
+
+        try {
+            while ((pleaseWait.isDisplayed()) | (loading).isDisplayed()) {
+
+                Thread.sleep(1000);
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     //Bookings---------------------------------------------------------
@@ -154,15 +184,21 @@ public class DailyViewPage {
         this.editAbsenceBtn.click();
     }
 
-    public boolean checkIfBookingIsPresent(String searchedBooking){
+    public boolean checkIfBookingIsPresent(String searchedBooking) throws InterruptedException {
         boolean isPresent = true;
+
+        if(noRowsBookingTable.getAttribute("class").equals("noRowsToDisplay")){
+            isPresent = false;
+            this.writeLog.info("Item \"" + searchedBooking + "\" NOT found");
+            return isPresent;
+        }
 
         this.dvPageWait.until(ExpectedConditions.visibilityOf(bookingViewTable));
         SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
 
         int row = searchInTable.searchItem(bookingViewTable, 6, searchedBooking);
         if (row == -1){
-            this.writeLog.error("Item \"" + searchedBooking + "\" NOT found in column ");
+            this.writeLog.info("Item \"" + searchedBooking + "\" NOT found in column ");
             isPresent = false;
             return isPresent;
         }
@@ -173,14 +209,14 @@ public class DailyViewPage {
 
     }
 
-    public void clickSearchedBooking(String searchedBooking){
+    public void clickSearchedBooking(String searchedBooking) throws InterruptedException {
 
         this.dvPageWait.until(ExpectedConditions.visibilityOf(bookingViewTable));
         SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
 
         int row = searchInTable.searchItem(bookingViewTable, 6, searchedBooking);
         if (row == -1){
-            this.writeLog.error("Item \"" + searchedBooking + "\" NOT found in column ");
+            this.writeLog.info("Item \"" + searchedBooking + "\" NOT found in column ");
         }
         else
             this.writeLog.info("Item \"" + searchedBooking + "\" found in searched column ");
@@ -194,12 +230,18 @@ public class DailyViewPage {
     public boolean checkIfAbsenceIsPresent(String searchedAbsence){
         boolean isPresent = true;
 
+        if(noRowsAbsenceTable.getAttribute("class").equals("noRowsToDisplay")){
+            isPresent = false;
+            this.writeLog.info("Item \"" + searchedAbsence + "\" NOT found");
+            return isPresent;
+        }
+
         this.dvPageWait.until(ExpectedConditions.visibilityOf(absenceViewTable));
         SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
 
         int row = searchInTable.searchItem(absenceViewTable, 1, searchedAbsence);
         if (row == -1){
-            this.writeLog.error("Item \"" + searchedAbsence + "\" NOT found in column ");
+            this.writeLog.info("Item \"" + searchedAbsence + "\" NOT found in column ");
             isPresent = false;
             return isPresent;
         }
@@ -228,6 +270,7 @@ public class DailyViewPage {
         tableElement.click();
 
     }
+
 
 
 }

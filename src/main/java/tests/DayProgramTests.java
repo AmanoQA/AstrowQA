@@ -168,17 +168,30 @@ public class DayProgramTests extends ExtentManager {
         TopSideBar topSideBar = new TopSideBar(this.driver, this.wait, writeLog.get());
         DayProgramPage dayProgramPage = new DayProgramPage(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
 
         loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
         configuration.clickDayPrograms();
 
-        dayProgramPage.clickSearchedElementInDPTable(2, "03A");
+        topSideBar.clickNew();
+
+        dayProgramPage.setCode("07A");
+        dayProgramPage.setPayrollCode("07A");
+        dayProgramPage.setName("Basic 07A DP");
+        dayProgramPage.setNormtime("0800");
+        dayProgramPage.clickZonesTab();
+        dayProgramPage.setZoneTime1("0800");
+        dayProgramPage.setZoneTime2("1700");
+        dayProgramPage.clickCheckbox1("check");
+        buttons.clickSave();
+
+        dayProgramPage.clickSearchedElementInDPTable(2, "07A");
 
         topSideBar.clickDelete();
         topSideBar.clickDeleteYes();
 
-        assertFalse(dayProgramPage.checkIfItemIsPresentInTable(2, "03A"), "DP not deleted");
+        assertFalse(dayProgramPage.checkIfItemIsPresentInTable(2, "07A"), "DP not deleted");
     }
 
 }

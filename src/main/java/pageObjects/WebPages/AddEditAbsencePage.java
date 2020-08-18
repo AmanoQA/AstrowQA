@@ -40,6 +40,7 @@ public class AddEditAbsencePage {
         this.writeLog = l;
     }
 
+
     public void addAbsence(String absence, String authTime, String time) throws InterruptedException {
 
         Buttons buttons = new Buttons(this.absPageDriver, this.absPageWait, writeLog);
@@ -57,6 +58,15 @@ public class AddEditAbsencePage {
         this.selectAbsence(1, absence);
         this.selectAuthTime(2, authTime);
         buttons.clickSave();
+
+    }
+
+    public void deleteAbsence(String absence) throws InterruptedException {
+
+        Buttons buttons = new Buttons(this.absPageDriver, this.absPageWait, writeLog);
+
+        this.selectAbsence(1, absence);
+        buttons.clickDelete();
 
     }
 

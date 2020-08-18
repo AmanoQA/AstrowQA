@@ -30,6 +30,12 @@ public class Buttons {
     @FindBy(xpath = "//span[text()='Yes']")
     private WebElement yesBtn;
 
+    @FindBy(xpath = "//span[text()='No']")
+    private WebElement noBtn;
+
+    @FindBy(xpath = "//span[text() = 'Delete']")
+    private WebElement deleteBtn;
+
     // constructor
     public Buttons(WebDriver d, WebDriverWait w, ExtentTest l) {
 
@@ -77,6 +83,22 @@ public class Buttons {
         this.buttonsWait.until(ExpectedConditions.visibilityOf(yesBtn));
         this.writeLog.info("Click on Yes");
         this.yesBtn.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickNo() throws InterruptedException {
+
+        this.buttonsWait.until(ExpectedConditions.visibilityOf(noBtn));
+        this.writeLog.info("Click on No");
+        this.noBtn.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickDelete() throws InterruptedException {
+
+        this.buttonsWait.until(ExpectedConditions.visibilityOf(deleteBtn));
+        this.writeLog.info("Click on Delete");
+        this.deleteBtn.click();
         Thread.sleep(2000);
     }
 }

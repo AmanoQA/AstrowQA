@@ -48,6 +48,28 @@ public class TeamManagerPage {
         this.writeLog = l;
     }
 
+    public void waitPageToBeLoaded() {
+
+        try {
+            this.tmPageWait.until(ExpectedConditions.visibilityOf(loading));
+        } catch (Exception ignored) {
+        }
+
+        try {
+            this.tmPageWait.until(ExpectedConditions.visibilityOf(pleaseWait));
+        } catch (Exception ignored) {
+        }
+
+        try {
+            while ((pleaseWait.isDisplayed()) | (loading).isDisplayed()) {
+
+                Thread.sleep(1000);
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+
         public void selectDateFromTMCalendar(int index, String day, String month, String year) {
 
         this.tmPageWait.until(ExpectedConditions.elementToBeClickable(calendarBtn));

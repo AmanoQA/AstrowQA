@@ -366,7 +366,7 @@ public class DayProgramPage {
 
         int row = searchInTable.searchItem(dpTable, column_index, searchedItem);
         if (row == -1){
-            this.writeLog.error("Element " + searchedItem + " not found");
+            this.writeLog.info("Element " + searchedItem + " not found");
             return;
         }
 
@@ -391,7 +391,7 @@ public class DayProgramPage {
         int row = searchInTable.searchItem(dpTable, column_index, searchedItem);
         //If the item searched is not found, it will return false
         if (row == -1){
-            this.writeLog.error("Item \"" + searchedItem + "\" NOT found in column " + column_index);
+            this.writeLog.info("Item \"" + searchedItem + "\" NOT found in column " + column_index);
             isPresent = false;
             return isPresent;
         }

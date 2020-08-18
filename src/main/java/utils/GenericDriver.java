@@ -52,7 +52,7 @@ public class GenericDriver {
         }
 
         try {
-            while ((loading.isDisplayed()) | (pleaseWait.isDisplayed())){
+            while ((this.driver.findElement(By.xpath("//*[contains(text(),'Please wait')]")).isDisplayed()) | (this.driver.findElement(By.xpath("//*[contains(text(),'Loading')]")).isDisplayed())){
 
                 Thread.sleep(1000);
             }

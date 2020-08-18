@@ -59,20 +59,24 @@ public class ContextMenu {
         this.addAbsence.click();
     }
 
-    public void clickAddAbsenceByPeriod(){
+    public void clickAddAbsenceByPeriod() throws InterruptedException {
         this.contextMenuWait.until(ExpectedConditions.visibilityOf(absenceOperations));
         this.writeLog.info("Click on Add Absence by period option");
 
         Actions actions = new Actions(this.contextMenuDriver);
         actions.moveToElement(absenceOperations).perform();
+        Thread.sleep(2000);
+        actions.moveToElement(addAbsenceByPeriod).perform();
         this.addAbsenceByPeriod.click();
     }
 
-    public void clickRemoveAbsence(){
+    public void clickRemoveAbsence() throws InterruptedException {
         this.contextMenuWait.until(ExpectedConditions.visibilityOf(absenceOperations));
         this.writeLog.info("Click on Add Remove absence option");
 
         Actions actions = new Actions(this.contextMenuDriver);
+        actions.moveToElement(absenceOperations).perform();
+        Thread.sleep(2000);
         actions.moveToElement(removeAbsence).perform();
         this.removeAbsence.click();
     }

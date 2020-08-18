@@ -6,8 +6,8 @@ public class AppParams {
     public static String        urlCloud = "https://astrow.net";
     public static DriverType    driverType = DriverType.CHROME;
     public static String        authorName = "Elena Marin";
-    public static String        runOn = "local";
-    //public static String        runOn = "cloud";
+    //public static String        runOn = "local";
+    public static String        runOn = "cloud";
     public static String        domainCloud = "demo14";
 
 }

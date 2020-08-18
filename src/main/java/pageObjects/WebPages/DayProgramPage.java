@@ -118,9 +118,6 @@ public class DayProgramPage {
     @FindBy(xpath = "//*[@class ='x-grid-table x-grid-table-resizer']/tbody")
     private WebElement dpTable;
 
-    @FindBy(xpath = "//span[contains(@id, 'component')]")
-    private WebElement message;
-
 
     // constructor
     public DayProgramPage(WebDriver d, WebDriverWait w, ExtentTest l) {
@@ -358,24 +355,6 @@ public class DayProgramPage {
     }
 
     //--Methods--------------------------------------------------------------
-
-    public Boolean checkValidationMessage(String messageToBeChecked){
-
-        //Enter the validation message that you will need to check
-
-        boolean isDisplayed = false;
-        this.dpPageWait.until(ExpectedConditions.visibilityOf(message));
-        String messageDisplayed = this.message.getText();
-
-        if (messageDisplayed.equals(messageToBeChecked)){
-            this.writeLog.info("Validation message is connect: " + "\" " + messageToBeChecked + " \"");
-            isDisplayed = true;
-        }
-        else {
-            this.writeLog.error("Validation message " + "\" " + messageToBeChecked + " \"" + " was not displayed ");
-        }
-        return isDisplayed;
-    }
 
 
     public void clickSearchedElementInDPTable(int column_index, String searchedItem) {

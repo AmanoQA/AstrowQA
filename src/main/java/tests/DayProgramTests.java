@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 import pageObjects.Controls.Buttons;
+import pageObjects.Controls.ValidationMessage;
 import pageObjects.ToolBars.TopSideBar;
 import pageObjects.WebPages.DayProgramPage;
 import pageObjects.Menu.Configuration;
@@ -120,6 +121,7 @@ public class DayProgramTests extends ExtentManager {
         DayProgramPage dayProgramPage = new DayProgramPage(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        ValidationMessage validationMessage = new ValidationMessage(this.driver, this.wait, writeLog.get());
 
         loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
@@ -131,7 +133,7 @@ public class DayProgramTests extends ExtentManager {
         dayProgramPage.setName("Paid Break | Norm - 07:30");
         buttons.clickSave();
 
-        assertTrue(dayProgramPage.checkValidationMessage("Duplicate day program code!"), "Message is not displayed");
+        assertTrue(validationMessage.checkValidationMessage("Duplicate day program code!"), "Message is not displayed");
 
     }
 
@@ -144,6 +146,7 @@ public class DayProgramTests extends ExtentManager {
         DayProgramPage dayProgramPage = new DayProgramPage(this.driver, this.wait, writeLog.get());
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        ValidationMessage validationMessage = new ValidationMessage(this.driver, this.wait, writeLog.get());
 
         loginPage.doLogin(AppParams.domainCloud, "hr", "1");
         configuration.clickConfiguration();
@@ -153,7 +156,7 @@ public class DayProgramTests extends ExtentManager {
         dayProgramPage.setCode("05A");
         buttons.clickSave();
 
-        assertTrue(dayProgramPage.checkValidationMessage("You must enter correct values in all required fields!"), "Message is not displayed");
+        assertTrue(validationMessage.checkValidationMessage("You must enter correct values in all required fields!"), "Message is not displayed");
 
     }
 

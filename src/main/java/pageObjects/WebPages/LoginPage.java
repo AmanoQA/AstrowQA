@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.Controls.ValidationMessage;
 import utils.AppParams;
 
 
@@ -47,6 +48,12 @@ public class LoginPage  {
 
     @FindBy(xpath = "//*[@id = 'loginButton']")
     private WebElement loginCloudBtn;
+
+    @FindBy(xpath = "//*[contains(@class, 'error')]")
+    private WebElement messageCloud;
+
+    @FindBy(xpath = "//*[@id = 'popup_content']")
+    private WebElement popupMessageCloud;
 
 
     // constructor
@@ -213,6 +220,38 @@ public class LoginPage  {
                 (this.loginPageDriver.manage().getCookieNamed("loginRemember").getValue().equals("true"))){
             isDisplayed = true;
             return isDisplayed;
+        }
+        return isDisplayed;
+    }
+
+
+
+    public boolean checkValidationMessageCloud(String messageToBeChecked){
+        boolean isDisplayed = false;
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(messageCloud));
+        String messageDisplayed = this.messageCloud.getText();
+
+        if (messageDisplayed.equals(messageToBeChecked)){
+            this.writeLog.info("Validation message is connect: " + "\" " + messageToBeChecked + " \"");
+            isDisplayed = true;
+        }
+        else {
+            this.writeLog.error("Validation message " + "\" " + messageToBeChecked + " \"" + " was not displayed ");
+        }
+        return isDisplayed;
+    }
+
+    public boolean popupValidationMessageCloud(String messageToBeChecked){
+        boolean isDisplayed = false;
+        this.loginPageWait.until(ExpectedConditions.visibilityOf(popupMessageCloud));
+        String messageDisplayed = this.popupMessageCloud.getText();
+
+        if (messageDisplayed.equals(messageToBeChecked)){
+            this.writeLog.info("Validation message is connect: " + "\" " + messageToBeChecked + " \"");
+            isDisplayed = true;
+        }
+        else {
+            this.writeLog.error("Validation message " + "\" " + messageToBeChecked + " \"" + " was not displayed ");
         }
         return isDisplayed;
     }

@@ -86,7 +86,7 @@ public class TeamManagerTests extends ExtentManager {
 
     @Test
     public void deleteAbsence() throws InterruptedException {
-        this.createTestReport("Add Absence with \"(h) Custom time\" for an employee", "Employee: ACHIM ALIN, day: 7, Absence - Business trip");
+        this.createTestReport("Delete Absence for an employee", "Employee: ACHIM ALIN, day: 10, Absence - Business trip");
 
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Operations operations = new Operations(this.driver, this.wait, writeLog.get());
@@ -118,6 +118,39 @@ public class TeamManagerTests extends ExtentManager {
     }
 
     @Test
+    public void deleteAbsenceWithAuth() throws InterruptedException {
+        this.createTestReport("Delete Absence for an employee with Auth time \"(1) Adjust to normtime\"", "Employee: ACHIM ALIN, day: 11, Absence - Business trip");
+
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        //Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditAbsencePage addEditAbsencePage = new AddEditAbsencePage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        teamManagerPage.waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("ACHIM ALIN", 11);
+        //teamManagerPage.clickSearchedElementInTMTable("61000378", 2);
+
+        contextMenu.clickAddAbsence();
+        addEditAbsencePage.addAbsence("Business trip", "(1) Adjust to normtime");
+        teamManagerPage.waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("ACHIM ALIN", 11);
+        contextMenu.clickRemoveAbsence();
+        addEditAbsencePage.deleteAbsence("Business trip", "(1) Adjust to normtime");
+        teamManagerPage.waitPageToBeLoaded();
+
+        assertFalse(teamManagerPage.checkIfItemIsPresentInSelectedDay("ACHIM ALIN", 11, "BT"), "Absence not found");
+
+    }
+
+    @Test
     public void addBooking() throws InterruptedException {
         this.createTestReport("Add booking for an employee", "Employee: AGACHE MIHAI, day: 4, Booking - 10:25");
 
@@ -142,6 +175,90 @@ public class TeamManagerTests extends ExtentManager {
         buttons.clickOK();
 
         assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 4, "10:25"), "Booking not found");
+
+    }
+
+    @Test
+    public void addBookingWithCompanySite() throws InterruptedException {
+        this.createTestReport("Add booking + Company Site for an employee ", "Employee: AGACHE MIHAI, day: 5, Booking - 10:25");
+
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        teamManagerPage.waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("AGACHE MIHAI", 5);
+
+        contextMenu.clickAddBooking();
+        addEditBookingPage.addBooking("1025", "C", "HARMAN RO");
+        teamManagerPage.waitPageToBeLoaded();
+        buttons.clickOK();
+
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 5, "10:25"), "Booking not found");
+
+    }
+
+    @Test
+    public void addBookingWithMCCode() throws InterruptedException {
+        this.createTestReport("Add booking + MC for an employee", "Employee: AGACHE MIHAI, day: 6, Booking - 10:25");
+
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        teamManagerPage.waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("AGACHE MIHAI", 6);
+
+        contextMenu.clickAddBooking();
+        addEditBookingPage.addBookingMC("1025", "C", "Absence");
+        teamManagerPage.waitPageToBeLoaded();
+        buttons.clickOK();
+
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 6, "10:25"), "Booking not found");
+
+    }
+
+    @Test
+    public void addBookingWithCCCode() throws InterruptedException {
+        this.createTestReport("Add booking + CC for an employee", "Employee: AGACHE MIHAI, day: 7, Booking - 10:25");
+
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        Buttons buttons = new Buttons(this.driver, this.wait, writeLog.get());
+        AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        teamManagerPage.waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("AGACHE MIHAI", 7);
+
+        contextMenu.clickAddBooking();
+        addEditBookingPage.addBookingCC("1025", "C", "CC");
+        teamManagerPage.waitPageToBeLoaded();
+        buttons.clickOK();
+
+        assertTrue(teamManagerPage.checkIfItemIsPresentInSelectedDay("AGACHE MIHAI", 7, "10:25"), "Booking not found");
 
     }
 

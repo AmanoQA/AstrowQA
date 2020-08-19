@@ -38,6 +38,35 @@ public class DailyViewPage {
     @FindBy(xpath = "(//*[contains(@id, 'toolbar')]//*[contains(@class,'clsRefreshList')])[2]")
     private WebElement refreshCounters;
 
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateBackPeriod')]")
+    private WebElement navigateBackPeriod;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateBackDay')]")
+    private WebElement navigateBackDay;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateToday')]")
+    private WebElement navigateToday;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateForwardDay')]")
+    private WebElement navigateForwardDay;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateForwardPeriod')]")
+    private WebElement navigateForwardPeriod;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateFirstEmployee')]")
+    private WebElement navigateFirstEmployee;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateUpEmployee')]")
+    private WebElement navigateUpEmployee;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateDownEmployee')]")
+    private WebElement navigateDownEmployee;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsNavigateLastEmployee')]")
+    private WebElement navigateLastEmployee;
+
+    @FindBy(xpath = "(//*[contains(@id, 'DayView')]//*[contains(@class, 'clsChangeDayProgram')]")
+    private WebElement changeDayprogram;
 
     //Bookings---------------------------------------------------------
 
@@ -101,8 +130,6 @@ public class DailyViewPage {
 
     @FindBy(xpath = "//*[contains(text(),'Loading')]")
     private WebElement loading;
-
-
 
 
     // constructor
@@ -170,6 +197,66 @@ public class DailyViewPage {
         this.dvPageWait.until(ExpectedConditions.visibilityOf(refreshCounters));
         this.writeLog.info("Click \"Refresh Counters\" ");
         this.refreshCounters.click();
+    }
+
+    public void clickNavigateBackPeriod() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateBackPeriod));
+        this.writeLog.info("Click \"Navigate back period\" ");
+        this.navigateBackPeriod.click();
+    }
+
+    public void clickNavigateBackDay() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateBackDay));
+        this.writeLog.info("Click \"Navigate back day\" ");
+        this.navigateBackDay.click();
+    }
+
+    public void clickNavigateToday() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateToday));
+        this.writeLog.info("Click \"Navigate today\" ");
+        this.navigateToday.click();
+    }
+
+    public void clickNavigateForwardDay() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateForwardDay));
+        this.writeLog.info("Click \"Navigate forward day\" ");
+        this.navigateForwardDay.click();
+    }
+
+    public void clickNavigateForwardPeriod() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateForwardPeriod));
+        this.writeLog.info("Click \"Navigate forward period\" ");
+        this.navigateForwardPeriod.click();
+    }
+
+    public void clickNavigateFirstEmployee() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateFirstEmployee));
+        this.writeLog.info("Click \"Navigate first employee\" ");
+        this.navigateFirstEmployee.click();
+    }
+
+    public void clickNavigateUpEmployee() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateUpEmployee));
+        this.writeLog.info("Click \"Navigate up employee\" ");
+        this.navigateUpEmployee.click();
+    }
+
+    public void clickNavigateDownEmployee() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateDownEmployee));
+        this.writeLog.info("Click \"Navigate down employee\" ");
+        this.navigateDownEmployee.click();
+    }
+
+    public void clickNavigateLastEmployee() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(navigateLastEmployee));
+        this.writeLog.info("Click \"Navigate last employee\" ");
+        this.navigateLastEmployee.click();
+    }
+
+    public void clickChangeDayProgram() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(changeDayprogram));
+        this.writeLog.info("Click \"Change Day program\" ");
+        this.changeDayprogram.click();
     }
 
 
@@ -243,6 +330,8 @@ public class DailyViewPage {
         this.editAbsenceBtn.click();
     }
 
+    //Methods----------------------------------------------------------------
+
     public boolean checkIfBookingIsPresent(String searchedBooking) throws InterruptedException {
         boolean isPresent = true;
 
@@ -263,6 +352,38 @@ public class DailyViewPage {
         }
         else
             this.writeLog.info("Item \"" + searchedBooking + "\" found in searched column ");
+
+        return isPresent;
+
+    }
+
+    public boolean checkIfBookingCompanySiteArePresent(String searchedBooking, String searchedCompanySite) throws InterruptedException {
+        boolean isPresent = true;
+
+        if(noRowsBookingTable.getAttribute("class").equals("noRowsToDisplay")){
+            isPresent = false;
+            this.writeLog.info("Item \"" + searchedBooking + "\" NOT found");
+            return isPresent;
+        }
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(bookingViewTable));
+        SearchInTable searchInTable = new SearchInTable(this.dvPageDriver, this.dvPageWait, writeLog);
+
+        int rowBooking = searchInTable.searchItem(bookingViewTable, 6, searchedBooking);
+        int rowCompanySite = searchInTable.searchItem(bookingViewTable, 12, searchedBooking);
+
+        if (rowBooking == -1) {
+            this.writeLog.info("Item \"" + searchedBooking + "\" NOT found in column ");
+            isPresent = false;
+            return isPresent;
+        }
+        else if(rowCompanySite == -1){
+            this.writeLog.info("Item \"" + searchedCompanySite + "\" NOT found in column ");
+            isPresent = false;
+            return isPresent;
+        }
+        else
+            this.writeLog.info("Items: \"" + searchedBooking + "\"" +" and " + "\"" + searchedCompanySite + "\" found in searched column ");
 
         return isPresent;
 
@@ -311,7 +432,6 @@ public class DailyViewPage {
 
     }
 
-
     public void clickSearchedAbsence(String searchedAbsence){
 
         this.dvPageWait.until(ExpectedConditions.visibilityOf(absenceViewTable));
@@ -329,7 +449,5 @@ public class DailyViewPage {
         tableElement.click();
 
     }
-
-
 
 }

@@ -69,21 +69,22 @@ public class TeamManagerPage {
         }
     }
 
+    //Methods----------------------------------------------------------------
 
-        public void selectDateFromTMCalendar(int index, String day, String month, String year) {
+    public void selectDateFromTMCalendar(int index, String day, String month, String year) {
 
         this.tmPageWait.until(ExpectedConditions.elementToBeClickable(calendarBtn));
         this.writeLog.info("Click on Calendar option ");
         this.calendarBtn.click();
 
-        WebElement calendarListElement = calendarTable.get(index-1);
+        WebElement calendarListElement = calendarTable.get(index - 1);
 
         Calendar calendar = new Calendar(this.tmPageDriver, this.tmPageWait, this.writeLog);
-        this.writeLog.info("Select date from calendar: " + day + " ," + month + " ,"+ year );
+        this.writeLog.info("Select date from calendar: " + day + " ," + month + " ," + year);
         calendar.selectDateFromCalendar(calendarListElement, day, month, year);
     }
 
-        public void clickCalendar() {
+    public void clickCalendar() {
 
         this.tmPageWait.until(ExpectedConditions.elementToBeClickable(calendarBtn));
         this.writeLog.info("Click on Calendar option ");

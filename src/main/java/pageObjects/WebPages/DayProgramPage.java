@@ -312,7 +312,7 @@ public class DayProgramPage {
         this.autoTab.click();
     }
 
-//--Zones--------------------------------------------------------------
+    //--Zones--------------------------------------------------------------
 
     public void clickZonesTab() {
 

@@ -31,6 +31,13 @@ public class AddEditAbsencePage {
     @FindBy(xpath = "//div[@class = 'list-ct']/ul")
     private List<WebElement> dropDownList;
 
+    @FindBy(xpath = "//div[contains(@id, 'absenceedit')]//*[contains(@class, 'clsAddNewItem')]")
+    private WebElement addAuthMore;
+
+    @FindBy(xpath = "//div[contains(@id, 'absenceedit')]//*[contains(@class, 'clsDeleteItem')]")
+    private WebElement deleteAuth;
+
+
     // constructor
     public AddEditAbsencePage(WebDriver d, WebDriverWait w, ExtentTest l) {
 
@@ -40,6 +47,17 @@ public class AddEditAbsencePage {
         this.writeLog = l;
     }
 
+    public void clickAddMoreAuthTime(){
+        this.absPageWait.until(ExpectedConditions.visibilityOf(addAuthMore));
+        this.writeLog.info("Click \"Add More Auth Time\" ");
+        this.addAuthMore.click();
+    }
+
+    public void clickDeleteAuthTime(){
+        this.absPageWait.until(ExpectedConditions.visibilityOf(deleteAuth));
+        this.writeLog.info("Click \"Delete Auth Time\" ");
+        this.deleteAuth.click();
+    }
 
     public void addAbsence(String absence, String authTime, String time) throws InterruptedException {
 
@@ -66,6 +84,29 @@ public class AddEditAbsencePage {
         Buttons buttons = new Buttons(this.absPageDriver, this.absPageWait, writeLog);
 
         this.selectAbsence(1, absence);
+        buttons.clickDelete();
+
+    }
+
+
+    public void deleteAbsence(String absence, String authTime) throws InterruptedException {
+
+        Buttons buttons = new Buttons(this.absPageDriver, this.absPageWait, writeLog);
+
+        this.selectAbsence(1, absence);
+        this.clickAddMoreAuthTime();
+        this.selectAuthTime(2, authTime);
+        buttons.clickDelete();
+
+    }
+
+    public void deleteAbsence(String absence, String authTime, String time) throws InterruptedException {
+
+        Buttons buttons = new Buttons(this.absPageDriver, this.absPageWait, writeLog);
+
+        this.selectAbsence(1, absence);
+        this.clickAddMoreAuthTime();
+        this.selectAuthTime(2, authTime, time);
         buttons.clickDelete();
 
     }

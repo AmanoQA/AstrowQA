@@ -38,6 +38,32 @@ public class DailyViewTests extends ExtentManager {
         assertTrue(dailyViewPage.checkIfBookingIsPresent("14:25"));
 
     }
+    @Test
+    public void checkAddBookingWithCompanySite() throws InterruptedException {
+        this.createTestReport("Check Add Booking + Company Site", "Check Add Booking");
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        AddEditBookingPage addEditBookingPage = new AddEditBookingPage(this.driver, this.wait, writeLog.get());
+        DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 10);
+        contextMenu.clickDailyView();
+        dailyViewPage.clickNewBooking();
+        addEditBookingPage.addBooking("1425", "C", "HARMAN RO");
+        dailyViewPage.waitPageToBeLoaded();
+
+        assertTrue(dailyViewPage.checkIfBookingCompanySiteArePresent("14:25", "HARMAN RO"));
+
+    }
+
 
     @Test
     public void editBooking() throws InterruptedException {

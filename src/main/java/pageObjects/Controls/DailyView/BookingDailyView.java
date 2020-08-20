@@ -58,8 +58,9 @@ public class BookingDailyView {
                     bookingDetails.put("BK", cellText);
                     bookingDetails.put("Type", columns_row.get(9).getText());
                     bookingDetails.put("MC", columns_row.get(10).getText());
-                    bookingDetails.put("CC",columns_row.get(11).getText() );
+                    bookingDetails.put("CC", columns_row.get(11).getText() );
                     bookingDetails.put("CS", columns_row.get(12).getText());
+                    bookingDetails.put("Prj", columns_row.get(13).getText());
                     this.writeLog.info(searchedItem + " was found in the list");
                     break;
                 }

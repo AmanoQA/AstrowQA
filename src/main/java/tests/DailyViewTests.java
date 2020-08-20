@@ -338,11 +338,56 @@ public class DailyViewTests extends ExtentManager {
         operations.clickTeamManager();
         waitPageToBeLoaded();
 
-        teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 14);
+        teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 3);
         contextMenu.clickDailyView();
 
         assertTrue(dailyViewPage.checkCounterValue("BAL", "-8:00"));
 
+    }
+    @Test
+    public void checkAnomaly() {
+        this.createTestReport("Delete an absence", "Delete an absence");
+        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+        DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
+
+        loginPage.doLogin(AppParams.domainCloud, "eumarin", "1");
+
+        operations.clickOperation();
+        operations.clickTeamManager();
+        waitPageToBeLoaded();
+
+        teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 3);
+        contextMenu.clickDailyView();
+
+        assertTrue(dailyViewPage.checkIfAnomalyIsPresent("Hours worked < Daily minimum"));
 
     }
+
+    //NOT WORKING
+//    @Test
+//    public void clickProjectBooking() throws InterruptedException {
+//        this.createTestReport("Delete an absence", "Delete an absence");
+//        LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
+//        Operations operations = new Operations(this.driver, this.wait, writeLog.get());
+//        TeamManagerPage teamManagerPage = new TeamManagerPage(this.driver, this.wait, writeLog.get());
+//        ContextMenu contextMenu = new ContextMenu(this.driver, this.wait, writeLog.get());
+//        DailyViewPage dailyViewPage = new DailyViewPage(this.driver, this.wait, writeLog.get());
+//        AddEditProjectBooking addEditProjectBooking = new AddEditProjectBooking(this.driver, this.wait, writeLog.get());
+//
+//        loginPage.doLogin(AppParams.domainCloud, "hr", "1");
+//
+//        operations.clickOperation();
+//        operations.clickTeamManager();
+//        waitPageToBeLoaded();
+//
+//        teamManagerPage.clickSearchedElementInTMTable("BALULESCU PATRICK CLAUDIU", 3);
+//        contextMenu.clickDailyView();
+//        dailyViewPage.clickNewProjectBooking();
+//        addEditProjectBooking.addProjectBooking("1023", "12", "Project1", "Component1", "Activity1" );
+//
+//    }
+
 }

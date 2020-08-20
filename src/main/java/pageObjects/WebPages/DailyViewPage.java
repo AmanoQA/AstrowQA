@@ -4,14 +4,18 @@ import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Controls.DailyView.AbsenceDailyView;
+import pageObjects.Controls.DailyView.AnomaliesDailyView;
 import pageObjects.Controls.DailyView.BookingDailyView;
 import pageObjects.Controls.DailyView.CountersDailyView;
 import pageObjects.Controls.SearchInTable;
+
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DailyViewPage {
@@ -71,6 +75,14 @@ public class DailyViewPage {
     private WebElement changeDayprogram;
 
     //Bookings---------------------------------------------------------
+
+
+
+    @FindBy(xpath = "//*[contains(text(), 'Add project booking')]")
+    private WebElement newProjectBookingBtn;
+
+    @FindBy(xpath = "(//*[contains(@class, 'x-btn-split x-btn-split-right')])[2]")
+    private WebElement openProjectBookingBtn;
 
     @FindBy(xpath = "//*[contains(@id, 'bookingview')]//*[contains(text(),'New')]")
     private WebElement newBookingBtn;
@@ -282,6 +294,17 @@ public class DailyViewPage {
 
 
     //Bookings---------------------------------------------------------
+
+    public void clickNewProjectBooking() {
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(newBookingBtn));
+
+        Actions btnBuilder = new Actions(dvPageDriver);
+        btnBuilder.moveToElement(newBookingBtn, 30 ,0 );
+        btnBuilder.click().perform();
+
+        this.writeLog.info("Click \"New Project Booking\" ");
+        this.newProjectBookingBtn.click();
+    }
 
     public void clickNewBooking() {
         this.dvPageWait.until(ExpectedConditions.visibilityOf(newBookingBtn));
@@ -617,6 +640,27 @@ public class DailyViewPage {
         else
             this.writeLog.info("Counter " + counter + " = " + value + " - NOT correct");
         return isCorrect;
+    }
+
+    public boolean checkIfAnomalyIsPresent(String anomaly){
+
+        boolean isPresent = false;
+
+        this.dvPageWait.until(ExpectedConditions.visibilityOf(anomaliesViewTable));
+        AnomaliesDailyView anomaliesDailyView = new AnomaliesDailyView(this.dvPageDriver, this.dvPageWait, writeLog);
+        ArrayList<String> anomaliesDetails = anomaliesDailyView.getAnomaliesDetails();
+
+        for (String anomaliesDetail : anomaliesDetails) {
+            if (anomaliesDetail.equals(anomaly)) {
+                isPresent = true;
+                this.writeLog.info("Anomaly " + anomaly + " found");
+                break;
+            }
+            else
+                this.writeLog.info("Anomaly " + anomaly + " NOT found");
+        }
+
+        return isPresent;
     }
 
 }

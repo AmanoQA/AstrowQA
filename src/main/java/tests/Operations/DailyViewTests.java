@@ -1,16 +1,17 @@
-package tests;
+package tests.Operations;
 
 import org.testng.annotations.Test;
 import pageObjects.Controls.DailyView.BookingDailyView;
 import pageObjects.Controls.Buttons;
-import pageObjects.Controls.DailyView.CountersDailyView;
 import pageObjects.Menu.Operations;
 import pageObjects.Menu.TeamManager.ContextMenu;
 import pageObjects.WebPages.*;
+import pageObjects.WebPages.Operations.AddEditAbsencePage;
+import pageObjects.WebPages.Operations.AddEditBookingPage;
+import pageObjects.WebPages.Operations.DailyViewPage;
+import pageObjects.WebPages.Operations.TeamManagerPage;
 import utils.AppParams;
 import utils.ExtentManager;
-
-import java.util.Map;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -186,7 +187,7 @@ public class DailyViewTests extends ExtentManager {
     }
 
     @Test(dependsOnMethods = {"editBooking"})
-    public void checkBooking() throws InterruptedException {
+    public void checkBooking() {
         this.createTestReport("Check a Booking", "Check a Booking");
         LoginPage loginPage = new LoginPage(this.driver, this.wait, writeLog.get());
         Operations operations = new Operations(this.driver, this.wait, writeLog.get());

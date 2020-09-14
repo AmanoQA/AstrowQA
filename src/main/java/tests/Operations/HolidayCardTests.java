@@ -1,13 +1,12 @@
-package tests;
+package tests.Operations;
 
-import com.aventstack.extentreports.ExtentTest;
 import org.testng.annotations.Test;
 import pageObjects.Menu.Operations;
 import pageObjects.Menu.TeamManager.ContextMenu;
 import pageObjects.Menu.View;
-import pageObjects.WebPages.HolidayCardPage;
+import pageObjects.WebPages.Operations.HolidayCardPage;
 import pageObjects.WebPages.LoginPage;
-import pageObjects.WebPages.TeamManagerPage;
+import pageObjects.WebPages.Operations.TeamManagerPage;
 import utils.AppParams;
 import utils.ExtentManager;
 

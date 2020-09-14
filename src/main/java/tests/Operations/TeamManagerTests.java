@@ -1,13 +1,13 @@
-package tests;
+package tests.Operations;
 
 import org.testng.annotations.Test;
 import pageObjects.Controls.Buttons;
 import pageObjects.Menu.TeamManager.ContextMenu;
 import pageObjects.Menu.Operations;
-import pageObjects.WebPages.AddEditAbsencePage;
-import pageObjects.WebPages.AddEditBookingPage;
+import pageObjects.WebPages.Operations.AddEditAbsencePage;
+import pageObjects.WebPages.Operations.AddEditBookingPage;
 import pageObjects.WebPages.LoginPage;
-import pageObjects.WebPages.TeamManagerPage;
+import pageObjects.WebPages.Operations.TeamManagerPage;
 import utils.AppParams;
 import utils.ExtentManager;
 

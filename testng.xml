@@ -10,10 +10,10 @@
 
     <test name="Configurations">
         <classes>
-            <class name="tests.DayProgramTests"></class>
-            <class name="tests.TeamManagerTests"></class>
-            <class name="tests.DailyViewTests"></class>
-            <class name="tests.HolidayCardTests"></class>
+            <class name="tests.Configuration.DayProgramTests"></class>
+            <class name="tests.Operations.TeamManagerTests"></class>
+            <class name="tests.Operations.DailyViewTests"></class>
+            <class name="tests.Operations.HolidayCardTests"></class>
         </classes>
     </test>
 

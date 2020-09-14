@@ -1,4 +1,4 @@
-package pageObjects.WebPages;
+package pageObjects.WebPages.Operations;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;

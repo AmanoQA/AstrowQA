@@ -1,10 +1,10 @@
-package tests;
+package tests.Configuration;
 
 import org.testng.annotations.Test;
 import pageObjects.Controls.Buttons;
 import pageObjects.Controls.ValidationMessage;
 import pageObjects.ToolBars.TopSideBar;
-import pageObjects.WebPages.DayProgramPage;
+import pageObjects.WebPages.Configuration.DayProgramPage;
 import pageObjects.Menu.Configuration;
 import pageObjects.WebPages.LoginPage;
 import utils.AppParams;

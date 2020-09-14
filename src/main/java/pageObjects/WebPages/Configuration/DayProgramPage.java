@@ -1,4 +1,4 @@
-package pageObjects.WebPages;
+package pageObjects.WebPages.Configuration;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
